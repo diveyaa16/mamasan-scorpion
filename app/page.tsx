@@ -405,6 +405,7 @@ export default function Home() {
   const [selectedSyrup, setSelectedSyrup] = useState<any>({});
 
   const [cartOpen, setCartOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
   const [customerName, setCustomerName] = useState("");
 const [customerPhone, setCustomerPhone] = useState("");
   useEffect(() => {
@@ -578,34 +579,43 @@ const finalItem = {
         🛒{cart.length}
       </button>
 
-      {/* CATEGORY NAV */}
+    {/* CATEGORY NAV */}
 <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b] overflow-x-auto">
 
   <div className="flex whitespace-nowrap text-[#c8a96b] font-black text-sm">
 
-    <a href="#burgers" className="px-5 py-4">BURGERS</a>
+    <button
+      onClick={() => setActiveCategory("All")}
+      className={`px-5 py-4 ${
+        activeCategory === "All"
+          ? "bg-[#c8a96b] text-black"
+          : ""
+      }`}
+    >
+      HOME
+    </button>
 
-    <a href="#burgerroll" className="px-5 py-4">BURGER ROLL</a>
+    {categories
+  .filter(
+    (category) =>
+      activeCategory === "All" ||
+      activeCategory === category
+  )
+  .map((category) => (
 
-    <a href="#omelette" className="px-5 py-4">OMELETTE</a>
+      <button
+        key={category}
+        onClick={() => setActiveCategory(category)}
+        className={`px-5 py-4 uppercase ${
+          activeCategory === category
+            ? "bg-[#c8a96b] text-black"
+            : ""
+        }`}
+      >
+        {category}
+      </button>
 
-    <a href="#wraps" className="px-5 py-4">WRAPS</a>
-
-    <a href="#rotty" className="px-5 py-4">ROTTY</a>
-
-    <a href="#friedrice" className="px-5 py-4">FRIED RICE</a>
-
-    <a href="#friednoodles" className="px-5 py-4">FRIED NOODLES</a>
-
-    <a href="#snacks" className="px-5 py-4">SNACKS</a>
-
-    <a href="#milkshakes" className="px-5 py-4">MILKSHAKES</a>
-
-    <a href="#protein" className="px-5 py-4">PROTEIN</a>
-
-    <a href="#juice" className="px-5 py-4">JUICES</a>
-
-    <a href="#drinks" className="px-5 py-4">HOT & COLD</a>
+    ))}
 
   </div>
 

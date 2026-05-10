@@ -3,8 +3,27 @@
 
 import { useState, useEffect } from "react";
 
+const syrups = [
+  "No Syrup",
+  "Caramel",
+  "Hazelnut",
+  "Vanilla",
+  "Brown Sugar",
+];
+
 const menuItems = [
   { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
+
+  { id: 51, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20 },
+{ id: 52, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
+{ id: 53, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
+{ id: 54, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
+
+{ id: 47, category: "Omelette", name: "Chicken Cheese Omelette", price: 15 },
+{ id: 48, category: "Omelette", name: "Bacon Cheese Omelette", price: 15 },
+{ id: 49, category: "Omelette", name: "Ham Cheese Omelette", price: 15 },
+{ id: 50, category: "Omelette", name: "Rotty Omelette", price: 20 },
+{ id: 51, category: "Omelette", name: "Lot Omelette" , price: 20},
 
   { id: 2, category: "Rotty Wrap", name: "Chicken Wrap", price: 23 },
   { id: 3, category: "Rotty Wrap", name: "Bacon Wrap", price: 23 },
@@ -48,18 +67,14 @@ const menuItems = [
   { id: 34, category: "Fresh Juice", name: "Watermelon Juice", price: 10 },
 
   { id: 35, category: "Hot & Cold", name: "Milo", price: 12, type: ["Hot", "Iced"] },
-  { id: 36, category: "Hot & Cold", name: "Cappuccino", price: 12, type: ["Hot", "Iced"] },
-  { id: 37, category: "Hot & Cold", name: "Americano", price: 12, type: ["Hot", "Iced"] },
+  { id: 36, category: "Hot & Cold", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 37, category: "Hot & Cold", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true,},
   { id: 38, category: "Hot & Cold", name: "Chocolate", price: 12, type: ["Hot", "Iced"] },
   { id: 39, category: "Hot & Cold", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
-  { id: 40, category: "Hot & Cold", name: "Latte", price: 12, type: ["Hot", "Iced"] },
-  { id: 41, category: "Hot & Cold", name: "Mocha", price: 12, type: ["Hot", "Iced"] },
-  { id: 42, category: "Hot & Cold", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"] },
+  { id: 40, category: "Hot & Cold", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 41, category: "Hot & Cold", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 42, category: "Hot & Cold", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true,},
 
-  { id: 43, category: "Hot & Cold", name: "Caramel Latte", price: 14, type: ["Hot", "Iced"] },
-  { id: 44, category: "Hot & Cold", name: "Hazelnut Latte", price: 14, type: ["Hot", "Iced"] },
-  { id: 45, category: "Hot & Cold", name: "Vanilla Latte", price: 14, type: ["Hot", "Iced"] },
-  { id: 46, category: "Hot & Cold", name: "Brown Sugar Latte", price: 15, type: ["Hot", "Iced"] },
 ];
 
 export default function Home() {
@@ -101,6 +116,7 @@ export default function Home() {
 
     const finalItem = {
       ...item,
+      quantity: 1, 
       selectedDrinkType: selectedType[item.id],
       selectedSyrup: syrupChoice,
       finalPrice: item.price + syrupPrice,
@@ -108,9 +124,30 @@ export default function Home() {
 
     setCart([...cart, finalItem]);
   };
+  const increaseQty = (index: number) => {
+
+  const updatedCart = [...cart];
+
+  updatedCart[index].quantity += 1;
+
+  setCart(updatedCart);
+};
+
+const decreaseQty = (index: number) => {
+
+  const updatedCart = [...cart];
+
+  if (updatedCart[index].quantity > 1) {
+    updatedCart[index].quantity -= 1;
+  } else {
+    updatedCart.splice(index, 1);
+  }
+
+  setCart(updatedCart);
+};
 
   const total = cart.reduce(
-    (sum, item) => sum + item.finalPrice,
+    (sum, item) => sum + item.finalPrice * item.quantity,
     0
   );
 
@@ -324,9 +361,14 @@ export default function Home() {
       {/* FLOATING CART */}
       <button
         onClick={() => setCartOpen(true)}
-        className="fixed bottom-6 right-6 bg-[#c8a96b] text-black w-16 h-16 rounded-full text-2xl z-50"
+        className="fixed bottom-6 right-6 bg-[#c8a96b] text-black w-16 h-16 rounded-full text-2xl z-50 flex items-center justify-center"
       >
         🛒
+        {cart.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+            {cart.length}
+          </span>
+        )}
       </button>
 
       {/* CART */}
@@ -376,9 +418,35 @@ export default function Home() {
                     </p>
                   )}
 
-                  <p className="text-[#c8a96b] font-bold mt-3">
-                    RM{item.finalPrice}
-                  </p>
+                <div className="flex items-center justify-between mt-4">
+
+  <div className="flex items-center gap-3">
+
+    <button
+      onClick={() => decreaseQty(index)}
+      className="bg-[#222] w-8 h-8 rounded-full"
+    >
+      -
+    </button>
+
+    <span className="font-bold">
+      {item.quantity}
+    </span>
+
+    <button
+      onClick={() => increaseQty(index)}
+      className="bg-[#c8a96b] text-black w-8 h-8 rounded-full"
+    >
+      +
+    </button>
+
+  </div>
+
+  <p className="text-[#c8a96b] font-bold">
+    RM{item.finalPrice * item.quantity}
+  </p>
+
+</div>
 
                 </div>
 
@@ -422,7 +490,7 @@ export default function Home() {
                   let message = `NEW ORDER - MAMASAN SCORPION\n\n`;
 
                   cart.forEach((item) => {
-                    message += `${item.name} - RM${item.finalPrice}\n`;
+                    message += `${item.name} x${item.quantity} - RM${item.finalPrice * item.quantity}\n`;
                   });
 
                   message += `\nTOTAL: RM${total}`;

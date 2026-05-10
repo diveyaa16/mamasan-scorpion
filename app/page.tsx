@@ -578,150 +578,205 @@ const finalItem = {
         🛒{cart.length}
       </button>
 
-      {/* MENU */}
-      <section className="p-8 bg-[#050505]">
+      {/* CATEGORY NAV */}
+<div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b] overflow-x-auto">
 
-        {categories.map((category) => (
+  <div className="flex whitespace-nowrap text-[#c8a96b] font-black text-sm">
 
-          <div key={category} className="mb-20">
+    <a href="#burgers" className="px-5 py-4">BURGERS</a>
 
-            <h2 className="text-4xl font-black uppercase mb-10 text-[#c8a96b]">
-              {category}
-            </h2>
+    <a href="#burgerroll" className="px-5 py-4">BURGER ROLL</a>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <a href="#omelette" className="px-5 py-4">OMELETTE</a>
 
-              {menuItems
-                .filter((item) => item.category === category)
-                .map((item) => (
+    <a href="#wraps" className="px-5 py-4">WRAPS</a>
 
-                  <div
-                    key={item.id}
-                    className="bg-[#111] border border-[#222] rounded-3xl p-6 hover:border-[#c8a96b] transition"
-                  >
+    <a href="#rotty" className="px-5 py-4">ROTTY</a>
 
-                    <h3 className="text-2xl font-black uppercase">
-                      {item.name}
-                    </h3>
+    <a href="#friedrice" className="px-5 py-4">FRIED RICE</a>
 
-                    {item.type && (
+    <a href="#friednoodles" className="px-5 py-4">FRIED NOODLES</a>
 
-                      <div className="flex gap-2 mt-4">
+    <a href="#snacks" className="px-5 py-4">SNACKS</a>
 
-                        {item.type.map((drinkType: string) => {
+    <a href="#milkshakes" className="px-5 py-4">MILKSHAKES</a>
 
-                          const isSelected =
-                            selectedType[item.id] === drinkType;
+    <a href="#protein" className="px-5 py-4">PROTEIN</a>
 
-                          return (
+    <a href="#juice" className="px-5 py-4">JUICES</a>
 
-                            <button
-                              key={drinkType}
-                              onClick={() =>
-                                setSelectedType({
-                                  ...selectedType,
-                                  [item.id]: drinkType,
-                                })
-                              }
-                              className={`px-3 py-1 rounded-full text-xs font-bold ${
-                                isSelected
-                                  ? "bg-[#c8a96b] text-black"
-                                  : "bg-[#222] text-white"
-                              }`}
-                            >
-                              {drinkType}
-                            </button>
+    <a href="#drinks" className="px-5 py-4">HOT & COLD</a>
 
-                          );
+  </div>
 
-                        })}
+</div>
 
-                      </div>
+{/* MENU */}
+<section className="p-8 bg-[#050505]">
 
-                    )}
+  {categories.map((category) => {
 
-                    {item.syrup && (
+    let sectionId = "";
 
-                      <div className="mt-5">
+    if (category === "Burgers") sectionId = "burgers";
+    if (category === "Burger Roll") sectionId = "burgerroll";
+    if (category === "Omelette") sectionId = "omelette";
+    if (category === "Rotty Wrap") sectionId = "wraps";
+    if (category === "Signature Rotty (4 PCS)") sectionId = "rotty";
+    if (category === "Fried Rice & Noodles") sectionId = "friedrice";
+    if (category === "Snacks") sectionId = "snacks";
+    if (category === "Milkshakes") sectionId = "milkshakes";
+    if (category === "Protein Shakes") sectionId = "protein";
+    if (category === "Fresh Juice") sectionId = "juice";
+    if (category === "Hot & Cold") sectionId = "drinks";
 
-                        <p className="text-xs text-gray-400 uppercase mb-3">
-                          Add Syrup
-                        </p>
+    return (
 
-                        <div className="flex flex-wrap gap-2">
+      <div
+        key={category}
+        id={sectionId}
+        className="mb-20 scroll-mt-24"
+      >
+
+        <h2 className="text-4xl font-black uppercase mb-10 text-[#c8a96b]">
+          {category}
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          {menuItems
+            .filter((item) => item.category === category)
+            .map((item) => (
+
+              <div
+                key={item.id}
+                className="bg-[#111] border border-[#222] rounded-3xl p-6 hover:border-[#c8a96b] transition"
+              >
+
+                <h3 className="text-2xl font-black uppercase">
+                  {item.name}
+                </h3>
+
+                {item.type && (
+
+                  <div className="flex gap-2 mt-4">
+
+                    {item.type.map((drinkType: string) => {
+
+                      const isSelected =
+                        selectedType[item.id] === drinkType;
+
+                      return (
+
+                        <button
+                          key={drinkType}
+                          onClick={() =>
+                            setSelectedType({
+                              ...selectedType,
+                              [item.id]: drinkType,
+                            })
+                          }
+                          className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            isSelected
+                              ? "bg-[#c8a96b] text-black"
+                              : "bg-[#222] text-white"
+                          }`}
+                        >
+                          {drinkType}
+                        </button>
+
+                      );
+
+                    })}
+
+                  </div>
+
+                )}
+
+                {item.syrup && (
+
+                  <div className="mt-5">
+
+                    <p className="text-xs text-gray-400 uppercase mb-3">
+                      Add Syrup (+RM3)
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+
+                      <button
+                        onClick={() =>
+                          setSelectedSyrup({
+                            ...selectedSyrup,
+                            [item.id]: "",
+                          })
+                        }
+                        className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          !selectedSyrup[item.id]
+                            ? "bg-[#c8a96b] text-black"
+                            : "bg-[#222] text-white"
+                        }`}
+                      >
+                        None
+                      </button>
+
+                      {syrups.map((syrup) => {
+
+                        const isSelected =
+                          selectedSyrup[item.id] === syrup;
+
+                        return (
 
                           <button
+                            key={syrup}
                             onClick={() =>
                               setSelectedSyrup({
                                 ...selectedSyrup,
-                                [item.id]: "",
+                                [item.id]: syrup,
                               })
                             }
                             className={`px-3 py-1 rounded-full text-xs font-bold ${
-                              !selectedSyrup[item.id]
+                              isSelected
                                 ? "bg-[#c8a96b] text-black"
                                 : "bg-[#222] text-white"
                             }`}
                           >
-                            None
+                            {syrup}
                           </button>
 
-                          {syrups.map((syrup) => {
+                        );
 
-                            const isSelected =
-                              selectedSyrup[item.id] === syrup;
+                      })}
 
-                            return (
-
-                              <button
-                                key={syrup}
-                                onClick={() =>
-                                  setSelectedSyrup({
-                                    ...selectedSyrup,
-                                    [item.id]: syrup,
-                                  })
-                                }
-                                className={`px-3 py-1 rounded-full text-xs font-bold ${
-                                  isSelected
-                                    ? "bg-[#c8a96b] text-black"
-                                    : "bg-[#222] text-white"
-                                }`}
-                              >
-                                {syrup}
-                              </button>
-
-                            );
-
-                          })}
-
-                        </div>
-
-                      </div>
-
-                    )}
-
-                    <p className="text-[#c8a96b] text-2xl font-bold mt-5">
-                      RM{item.price}
-                    </p>
-
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-                    >
-                      Add To Cart
-                    </button>
+                    </div>
 
                   </div>
 
-                ))}
+                )}
 
-            </div>
+                <p className="text-[#c8a96b] text-2xl font-bold mt-5">
+                  RM{item.price}
+                </p>
 
-          </div>
+                <button
+                  onClick={() => addToCart(item)}
+                  className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+                >
+                  Add To Cart
+                </button>
 
-        ))}
+              </div>
 
-      </section>
+            ))}
+
+        </div>
+
+      </div>
+
+    );
+
+  })}
+
+</section>
 
       {/* CART */}
       {cartOpen && (

@@ -1,116 +1,64 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-const syrups = [
-  "Caramel",
-  "Hazelnut",
-  "Vanilla",
-  "Brown Sugar",
-];
+import { useState, useEffect } from "react";
 
 const menuItems = [
-  {
-    id: 1,
-    category: "Burgers",
-    name: "Crispy Chicken Burger & Chips",
-    price: 25,
-  },
+  { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
 
-  {
-    id: 2,
-    category: "Burger Roll",
-    name: "Double Bacon Egg Cheese",
-    price: 20,
-  },
+  { id: 2, category: "Rotty Wrap", name: "Chicken Wrap", price: 23 },
+  { id: 3, category: "Rotty Wrap", name: "Bacon Wrap", price: 23 },
 
-  {
-    id: 3,
-    category: "Burger Roll",
-    name: "Double Bacon Cheese Onion",
-    price: 20,
-  },
+  { id: 4, category: "Signature Rotty (4 PCS)", name: "Crispy Rotty With Curry Dip", price: 12 },
+  { id: 5, category: "Signature Rotty (4 PCS)", name: "Chocolate Rotty", price: 12 },
 
-  {
-    id: 4,
-    category: "Omelette",
-    name: "Chicken Cheese Omelette",
-    price: 15,
-  },
+  { id: 6, category: "Fried Rice & Noodles", name: "Chicken Rice", price: 12 },
+  { id: 7, category: "Fried Rice & Noodles", name: "Chicken Spicy Rice", price: 12 },
+  { id: 8, category: "Fried Rice & Noodles", name: "Extra Chicken Rice", price: 17 },
+  { id: 9, category: "Fried Rice & Noodles", name: "Egg Rice", price: 12 },
 
-  {
-    id: 5,
-    category: "Omelette",
-    name: "Bacon Cheese Omelette",
-    price: 15,
-  },
+  { id: 10, category: "Fried Rice & Noodles", name: "Chicken Noodles", price: 12 },
+  { id: 11, category: "Fried Rice & Noodles", name: "Chicken Spicy Noodles", price: 12 },
+  { id: 12, category: "Fried Rice & Noodles", name: "Extra Chicken Noodles", price: 17 },
+  { id: 13, category: "Fried Rice & Noodles", name: "Egg Noodles", price: 12 },
 
-  {
-    id: 6,
-    category: "Rotty Wrap",
-    name: "Chicken Wrap",
-    price: 23,
-  },
+  { id: 14, category: "Snacks", name: "Fries", price: 10 },
+  { id: 15, category: "Snacks", name: "Chicken Nuggets", price: 10 },
 
-  {
-    id: 7,
-    category: "Signature Rotty",
-    name: "Chocolate Rotty",
-    price: 12,
-  },
+  { id: 16, category: "Milkshakes", name: "Strawberry Milkshake", price: 20 },
+  { id: 17, category: "Milkshakes", name: "Chocolate Milkshake", price: 20 },
+  { id: 18, category: "Milkshakes", name: "Oreo Milkshake", price: 20 },
+  { id: 19, category: "Milkshakes", name: "Oreo Strawberry Milkshake", price: 20 },
+  { id: 20, category: "Milkshakes", name: "Banana Milkshake", price: 20 },
+  { id: 21, category: "Milkshakes", name: "Coffee Milkshake", price: 20 },
+  { id: 22, category: "Milkshakes", name: "Mocha Milkshake", price: 20 },
+  { id: 23, category: "Milkshakes", name: "Vanilla Biscoff Milkshake", price: 20 },
 
-  {
-    id: 8,
-    category: "Fried Rice & Noodles",
-    name: "Chicken Rice",
-    price: 12,
-  },
+  { id: 24, category: "Protein Shakes", name: "Strawberry Protein", price: 25 },
+  { id: 25, category: "Protein Shakes", name: "Chocolate Protein", price: 25 },
+  { id: 26, category: "Protein Shakes", name: "Oreo Protein", price: 25 },
+  { id: 27, category: "Protein Shakes", name: "Oreo Strawberry Protein", price: 25 },
+  { id: 28, category: "Protein Shakes", name: "Banana Protein", price: 25 },
+  { id: 29, category: "Protein Shakes", name: "Coffee Protein", price: 25 },
+  { id: 30, category: "Protein Shakes", name: "Mocha Protein", price: 25 },
+  { id: 31, category: "Protein Shakes", name: "Vanilla Biscoff Protein", price: 25 },
 
-  {
-    id: 9,
-    category: "Snacks",
-    name: "Fries",
-    price: 10,
-  },
+  { id: 32, category: "Fresh Juice", name: "Orange Juice", price: 10 },
+  { id: 33, category: "Fresh Juice", name: "Apple Juice", price: 10 },
+  { id: 34, category: "Fresh Juice", name: "Watermelon Juice", price: 10 },
 
-  {
-    id: 10,
-    category: "Milkshakes",
-    name: "Oreo Milkshake",
-    price: 20,
-  },
+  { id: 35, category: "Hot & Cold", name: "Milo", price: 12, type: ["Hot", "Iced"] },
+  { id: 36, category: "Hot & Cold", name: "Cappuccino", price: 12, type: ["Hot", "Iced"] },
+  { id: 37, category: "Hot & Cold", name: "Americano", price: 12, type: ["Hot", "Iced"] },
+  { id: 38, category: "Hot & Cold", name: "Chocolate", price: 12, type: ["Hot", "Iced"] },
+  { id: 39, category: "Hot & Cold", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
+  { id: 40, category: "Hot & Cold", name: "Latte", price: 12, type: ["Hot", "Iced"] },
+  { id: 41, category: "Hot & Cold", name: "Mocha", price: 12, type: ["Hot", "Iced"] },
+  { id: 42, category: "Hot & Cold", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"] },
 
-  {
-    id: 11,
-    category: "Protein Shakes",
-    name: "Chocolate Protein",
-    price: 25,
-  },
-
-  {
-    id: 12,
-    category: "Fresh Juice",
-    name: "Orange Juice",
-    price: 10,
-  },
-
-  {
-    id: 13,
-    category: "Hot & Cold",
-    name: "Latte",
-    price: 12,
-    type: ["Hot", "Iced"],
-    syrup: true,
-  },
-
-  {
-    id: 14,
-    category: "Hot & Cold",
-    name: "Cappuccino",
-    price: 12,
-    type: ["Hot", "Iced"],
-    syrup: true,
-  },
+  { id: 43, category: "Hot & Cold", name: "Caramel Latte", price: 14, type: ["Hot", "Iced"] },
+  { id: 44, category: "Hot & Cold", name: "Hazelnut Latte", price: 14, type: ["Hot", "Iced"] },
+  { id: 45, category: "Hot & Cold", name: "Vanilla Latte", price: 14, type: ["Hot", "Iced"] },
+  { id: 46, category: "Hot & Cold", name: "Brown Sugar Latte", price: 15, type: ["Hot", "Iced"] },
 ];
 
 export default function Home() {

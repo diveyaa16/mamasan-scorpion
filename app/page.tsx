@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const syrups = [
   "Caramel",
@@ -84,89 +84,90 @@ const menuItems = [
     price: 20,
   },
 
-  // ROTTY WRAP
+  // WRAPS
   {
     id: 11,
-    category: "Rotty Wrap",
+    category: "Wraps",
     name: "Chicken Wrap",
     price: 23,
   },
 
   {
     id: 12,
-    category: "Rotty Wrap",
+    category: "Wraps",
     name: "Bacon Wrap",
     price: 23,
   },
 
-  // SIGNATURE ROTTY
+  // ROTTY
   {
     id: 13,
-    category: "Signature Rotty (4 PCS)",
+    category: "Rotty",
     name: "Crispy Rotty With Curry Dip",
     price: 12,
   },
 
   {
     id: 14,
-    category: "Signature Rotty (4 PCS)",
+    category: "Rotty",
     name: "Chocolate Rotty",
     price: 12,
   },
 
-  // FRIED RICE & NOODLES
+  // FRIED RICE
   {
     id: 15,
-    category: "Fried Rice & Noodles",
+    category: "Fried Rice",
     name: "Chicken Rice",
     price: 12,
   },
 
   {
     id: 16,
-    category: "Fried Rice & Noodles",
+    category: "Fried Rice",
     name: "Chicken Spicy Rice",
     price: 12,
   },
 
   {
     id: 17,
-    category: "Fried Rice & Noodles",
+    category: "Fried Rice",
     name: "Extra Chicken Rice",
     price: 17,
   },
 
   {
     id: 18,
-    category: "Fried Rice & Noodles",
+    category: "Fried Rice",
     name: "Egg Rice",
     price: 12,
   },
 
+  // FRIED NOODLES
   {
     id: 19,
-    category: "Fried Rice & Noodles",
+    category: "Fried Noodles",
     name: "Chicken Noodles",
     price: 12,
   },
 
   {
     id: 20,
-    category: "Fried Rice & Noodles",
+    category: "Fried Noodles",
     name: "Chicken Spicy Noodles",
     price: 12,
   },
 
   {
     id: 21,
-    category: "Fried Rice & Noodles",
+    category: "Fried Noodles",
     name: "Extra Chicken Noodles",
     price: 17,
   },
 
   {
     id: 22,
-    category: "Fried Rice & Noodles",
+    category: "Fried Noodles",
     name: "Egg Noodles",
     price: 12,
   },
@@ -215,158 +216,39 @@ const menuItems = [
     price: 20,
   },
 
+  // PROTEIN
   {
     id: 29,
-    category: "Milkshakes",
-    name: "Banana Milkshake",
-    price: 20,
-  },
-
-  {
-    id: 30,
-    category: "Milkshakes",
-    name: "Coffee Milkshake",
-    price: 20,
-  },
-
-  {
-    id: 31,
-    category: "Milkshakes",
-    name: "Mocha Milkshake",
-    price: 20,
-  },
-
-  {
-    id: 32,
-    category: "Milkshakes",
-    name: "Vanilla Biscoff Milkshake",
-    price: 20,
-  },
-
-  // PROTEIN SHAKES
-  {
-    id: 33,
-    category: "Protein Shakes",
-    name: "Strawberry Protein",
-    price: 25,
-  },
-
-  {
-    id: 34,
-    category: "Protein Shakes",
+    category: "Protein",
     name: "Chocolate Protein",
     price: 25,
   },
 
   {
-    id: 35,
-    category: "Protein Shakes",
-    name: "Oreo Protein",
-    price: 25,
-  },
-
-  {
-    id: 36,
-    category: "Protein Shakes",
-    name: "Oreo Strawberry Protein",
-    price: 25,
-  },
-
-  {
-    id: 37,
-    category: "Protein Shakes",
+    id: 30,
+    category: "Protein",
     name: "Banana Protein",
     price: 25,
   },
 
+  // JUICES
   {
-    id: 38,
-    category: "Protein Shakes",
-    name: "Coffee Protein",
-    price: 25,
-  },
-
-  {
-    id: 39,
-    category: "Protein Shakes",
-    name: "Mocha Protein",
-    price: 25,
-  },
-
-  {
-    id: 40,
-    category: "Protein Shakes",
-    name: "Vanilla Biscoff Protein",
-    price: 25,
-  },
-
-  // FRESH JUICE
-  {
-    id: 41,
-    category: "Fresh Juice",
+    id: 31,
+    category: "Juices",
     name: "Orange Juice",
     price: 10,
   },
 
   {
-    id: 42,
-    category: "Fresh Juice",
+    id: 32,
+    category: "Juices",
     name: "Apple Juice",
-    price: 10,
-  },
-
-  {
-    id: 43,
-    category: "Fresh Juice",
-    name: "Watermelon Juice",
     price: 10,
   },
 
   // HOT & COLD
   {
-    id: 44,
-    category: "Hot & Cold",
-    name: "Milo",
-    price: 12,
-    type: ["Hot", "Iced"],
-  },
-
-  {
-    id: 45,
-    category: "Hot & Cold",
-    name: "Cappuccino",
-    price: 12,
-    type: ["Hot", "Iced"],
-    syrup: true,
-  },
-
-  {
-    id: 46,
-    category: "Hot & Cold",
-    name: "Americano",
-    price: 12,
-    type: ["Hot", "Iced"],
-    syrup: true,
-  },
-
-  {
-    id: 47,
-    category: "Hot & Cold",
-    name: "Chocolate",
-    price: 12,
-    type: ["Hot", "Iced"],
-  },
-
-  {
-    id: 48,
-    category: "Hot & Cold",
-    name: "Thai Milk Tea",
-    price: 12,
-    type: ["Hot", "Iced"],
-  },
-
-  {
-    id: 49,
+    id: 33,
     category: "Hot & Cold",
     name: "Latte",
     price: 12,
@@ -375,7 +257,7 @@ const menuItems = [
   },
 
   {
-    id: 50,
+    id: 34,
     category: "Hot & Cold",
     name: "Mocha",
     price: 12,
@@ -384,34 +266,40 @@ const menuItems = [
   },
 
   {
-    id: 51,
+    id: 35,
     category: "Hot & Cold",
-    name: "Extra Shot Coffee",
-    price: 14,
+    name: "Americano",
+    price: 12,
     type: ["Hot", "Iced"],
     syrup: true,
   },
 
 ];
 
-
 export default function Home() {
 
   const [loading, setLoading] = useState(true);
 
+  const [activeCategory, setActiveCategory] = useState("Home");
+
+  const [cartOpen, setCartOpen] = useState(false);
+
   const [cart, setCart] = useState<any[]>([]);
 
   const [selectedType, setSelectedType] = useState<any>({});
+
   const [selectedSyrup, setSelectedSyrup] = useState<any>({});
 
-  const [cartOpen, setCartOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("All");
   const [customerName, setCustomerName] = useState("");
-const [customerPhone, setCustomerPhone] = useState("");
+
+  const [customerPhone, setCustomerPhone] = useState("");
+
   useEffect(() => {
+
     setTimeout(() => {
       setLoading(false);
     }, 1500);
+
   }, []);
 
   const categories = [...new Set(menuItems.map((item) => item.category))];
@@ -424,23 +312,18 @@ const [customerPhone, setCustomerPhone] = useState("");
     }
 
     const syrupChoice =
-  selectedSyrup[item.id] ||
-  item.selectedSyrup ||
-  "No Syrup";
+      selectedSyrup[item.id] || "No Syrup";
 
-const syrupPrice =
-  syrupChoice !== "No Syrup" ? 3 : 0;
+    const syrupPrice =
+      syrupChoice !== "No Syrup" ? 3 : 0;
 
-const basePrice = item.price || item.finalPrice || 0;
+    const finalItem = {
+      ...item,
+      selectedDrinkType: selectedType[item.id] || "",
+      selectedSyrup: syrupChoice,
+      finalPrice: item.price + syrupPrice,
+    };
 
-const finalItem = {
-  ...item,
-  price: basePrice,
-  selectedDrinkType: selectedType[item.id] || item.selectedDrinkType,
-  selectedSyrup: syrupChoice,
-  syrupPrice,
-  finalPrice: basePrice + syrupPrice,
-};
     const existing = cart.find(
       (c) =>
         c.id === finalItem.id &&
@@ -552,24 +435,16 @@ const finalItem = {
 
     <main className="bg-black text-white min-h-screen overflow-x-hidden">
 
-     {/* HERO */}
-<section className="relative w-full overflow-hidden bg-[#f5ede3]">
+      {/* HERO */}
+      <section className="bg-[#f5ede3]">
 
-  {/* Desktop & Tablet */}
-  <img
-    src="/hero-banner.jpeg"
-    alt="Mamasan Scorpion"
-    className="hidden md:block w-full h-auto"
-  />
+        <img
+          src="/hero-banner.jpeg"
+          alt="Mamasan Scorpion"
+          className="w-full h-auto"
+        />
 
-  {/* Mobile */}
-  <img
-    src="/hero-banner.jpeg"
-    alt="Mamasan Scorpion"
-    className="block md:hidden w-full h-auto object-contain"
-  />
-
-</section>
+      </section>
 
       {/* FLOATING CART */}
       <button
@@ -579,214 +454,162 @@ const finalItem = {
         🛒{cart.length}
       </button>
 
-    {/* CATEGORY NAV */}
-<div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b] overflow-x-auto">
+      {/* CATEGORY NAV */}
+      <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b] overflow-x-auto">
 
-  <div className="flex whitespace-nowrap text-[#c8a96b] font-black text-sm">
+        <div className="flex whitespace-nowrap">
 
-    <button
-      onClick={() => setActiveCategory("All")}
-      className={`px-5 py-4 ${
-        activeCategory === "All"
-          ? "bg-[#c8a96b] text-black"
-          : ""
-      }`}
-    >
-      HOME
-    </button>
+          <button
+            onClick={() => setActiveCategory("Home")}
+            className={`px-5 py-4 font-black ${
+              activeCategory === "Home"
+                ? "bg-[#c8a96b] text-black"
+                : "text-[#c8a96b]"
+            }`}
+          >
+            HOME
+          </button>
 
-    {categories
-  .filter(
-    (category) =>
-      activeCategory === "All" ||
-      activeCategory === category
-  )
-  .map((category) => (
+          {categories.map((category) => (
 
-      <button
-        key={category}
-        onClick={() => setActiveCategory(category)}
-        className={`px-5 py-4 uppercase ${
-          activeCategory === category
-            ? "bg-[#c8a96b] text-black"
-            : ""
-        }`}
-      >
-        {category}
-      </button>
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-5 py-4 font-black uppercase ${
+                activeCategory === category
+                  ? "bg-[#c8a96b] text-black"
+                  : "text-[#c8a96b]"
+              }`}
+            >
+              {category}
+            </button>
 
-    ))}
-
-  </div>
-
-</div>
-
-{/* MENU */}
-<section className="p-8 bg-[#050505]">
-
-  {categories.map((category) => {
-
-    let sectionId = "";
-
-    if (category === "Burgers") sectionId = "burgers";
-    if (category === "Burger Roll") sectionId = "burgerroll";
-    if (category === "Omelette") sectionId = "omelette";
-    if (category === "Rotty Wrap") sectionId = "wraps";
-    if (category === "Signature Rotty (4 PCS)") sectionId = "rotty";
-    if (category === "Fried Rice & Noodles") sectionId = "friedrice";
-    if (category === "Snacks") sectionId = "snacks";
-    if (category === "Milkshakes") sectionId = "milkshakes";
-    if (category === "Protein Shakes") sectionId = "protein";
-    if (category === "Fresh Juice") sectionId = "juice";
-    if (category === "Hot & Cold") sectionId = "drinks";
-
-    return (
-
-      <div
-        key={category}
-        id={sectionId}
-        className="mb-20 scroll-mt-24"
-      >
-
-        <h2 className="text-4xl font-black uppercase mb-10 text-[#c8a96b]">
-          {category}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-
-          {menuItems
-            .filter((item) => item.category === category)
-            .map((item) => (
-
-              <div
-                key={item.id}
-                className="bg-[#111] border border-[#222] rounded-3xl p-6 hover:border-[#c8a96b] transition"
-              >
-
-                <h3 className="text-2xl font-black uppercase">
-                  {item.name}
-                </h3>
-
-                {item.type && (
-
-                  <div className="flex gap-2 mt-4">
-
-                    {item.type.map((drinkType: string) => {
-
-                      const isSelected =
-                        selectedType[item.id] === drinkType;
-
-                      return (
-
-                        <button
-                          key={drinkType}
-                          onClick={() =>
-                            setSelectedType({
-                              ...selectedType,
-                              [item.id]: drinkType,
-                            })
-                          }
-                          className={`px-3 py-1 rounded-full text-xs font-bold ${
-                            isSelected
-                              ? "bg-[#c8a96b] text-black"
-                              : "bg-[#222] text-white"
-                          }`}
-                        >
-                          {drinkType}
-                        </button>
-
-                      );
-
-                    })}
-
-                  </div>
-
-                )}
-
-                {item.syrup && (
-
-                  <div className="mt-5">
-
-                    <p className="text-xs text-gray-400 uppercase mb-3">
-                      Add Syrup (+RM3)
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-
-                      <button
-                        onClick={() =>
-                          setSelectedSyrup({
-                            ...selectedSyrup,
-                            [item.id]: "",
-                          })
-                        }
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${
-                          !selectedSyrup[item.id]
-                            ? "bg-[#c8a96b] text-black"
-                            : "bg-[#222] text-white"
-                        }`}
-                      >
-                        None
-                      </button>
-
-                      {syrups.map((syrup) => {
-
-                        const isSelected =
-                          selectedSyrup[item.id] === syrup;
-
-                        return (
-
-                          <button
-                            key={syrup}
-                            onClick={() =>
-                              setSelectedSyrup({
-                                ...selectedSyrup,
-                                [item.id]: syrup,
-                              })
-                            }
-                            className={`px-3 py-1 rounded-full text-xs font-bold ${
-                              isSelected
-                                ? "bg-[#c8a96b] text-black"
-                                : "bg-[#222] text-white"
-                            }`}
-                          >
-                            {syrup}
-                          </button>
-
-                        );
-
-                      })}
-
-                    </div>
-
-                  </div>
-
-                )}
-
-                <p className="text-[#c8a96b] text-2xl font-bold mt-5">
-                  RM{item.price}
-                </p>
-
-                <button
-                  onClick={() => addToCart(item)}
-                  className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-                >
-                  Add To Cart
-                </button>
-
-              </div>
-
-            ))}
+          ))}
 
         </div>
 
       </div>
 
-    );
+      {/* MENU */}
+      <section className="p-8 bg-[#050505]">
 
-  })}
+        {(activeCategory === "Home"
+  ? categories
+  : [activeCategory]
+).map((category) => (
 
-</section>
+            <div
+              key={category}
+              className="mb-20"
+            >
+
+              <h2 className="text-4xl font-black uppercase mb-10 text-[#c8a96b]">
+                {category}
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                {menuItems
+                  .filter((item) => item.category === category)
+                  .map((item) => (
+
+                    <div
+                      key={item.id}
+                      className="bg-[#111] border border-[#222] rounded-3xl p-6"
+                    >
+
+                      <h3 className="text-2xl font-black uppercase">
+                        {item.name}
+                      </h3>
+
+                      {item.type && (
+
+                        <div className="flex gap-2 mt-4">
+
+                          {item.type.map((drinkType: string) => (
+
+                            <button
+                              key={drinkType}
+                              onClick={() =>
+                                setSelectedType({
+                                  ...selectedType,
+                                  [item.id]: drinkType,
+                                })
+                              }
+                              className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                selectedType[item.id] === drinkType
+                                  ? "bg-[#c8a96b] text-black"
+                                  : "bg-[#222]"
+                              }`}
+                            >
+                              {drinkType}
+                            </button>
+
+                          ))}
+
+                        </div>
+
+                      )}
+
+                      {item.syrup && (
+
+                        <div className="mt-5">
+
+                          <p className="text-xs text-gray-400 mb-3 uppercase">
+                            Add Syrup (+RM3)
+                          </p>
+
+                          <div className="flex flex-wrap gap-2">
+
+                            {syrups.map((syrup) => (
+
+                              <button
+                                key={syrup}
+                                onClick={() =>
+                                  setSelectedSyrup({
+                                    ...selectedSyrup,
+                                    [item.id]: syrup,
+                                  })
+                                }
+                                className={`px-3 py-1 rounded-full text-xs font-bold ${
+                                  selectedSyrup[item.id] === syrup
+                                    ? "bg-[#c8a96b] text-black"
+                                    : "bg-[#222]"
+                                }`}
+                              >
+                                {syrup}
+                              </button>
+
+                            ))}
+
+                          </div>
+
+                        </div>
+
+                      )}
+
+                      <p className="text-[#c8a96b] text-2xl font-bold mt-5">
+                        RM{item.price}
+                      </p>
+
+                      <button
+                        onClick={() => addToCart(item)}
+                        className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+                      >
+                        Add To Cart
+                      </button>
+
+                    </div>
+
+                  ))}
+
+              </div>
+
+            </div>
+
+          ))}
+
+      </section>
 
       {/* CART */}
       {cartOpen && (
@@ -823,20 +646,8 @@ const finalItem = {
                     {item.name}
                   </h3>
 
-                  {item.selectedDrinkType && (
-                    <p className="text-gray-400 text-sm mt-1">
-                      {item.selectedDrinkType}
-                    </p>
-                  )}
-
-                  {item.selectedSyrup !== "No Syrup" && (
-                    <p className="text-[#c8a96b] text-sm">
-                      + {item.selectedSyrup} Syrup
-                    </p>
-                  )}
-
-                  <p className="text-[#c8a96b] mt-3 font-bold">
-                  RM{item.finalPrice * item.quantity}
+                  <p className="text-[#c8a96b] mt-2 font-bold">
+                    RM{item.finalPrice * item.quantity}
                   </p>
 
                   <div className="flex items-center gap-4 mt-4">
@@ -875,102 +686,63 @@ const finalItem = {
 
             <div className="mt-8 space-y-4">
 
-  <input
-    type="text"
-    placeholder="Customer Name"
-    value={customerName}
-    onChange={(e) => setCustomerName(e.target.value)}
-    className="
-      w-full
-      bg-[#161616]
-      border border-[#333]
-      rounded-2xl
-      px-5 py-4
-      text-white
-      outline-none
-    "
-  />
+              <input
+                type="text"
+                placeholder="Customer Name"
+                value={customerName}
+                onChange={(e) =>
+                  setCustomerName(e.target.value)
+                }
+                className="w-full bg-[#161616] border border-[#333] rounded-2xl px-5 py-4"
+              />
 
-  <input
-    type="text"
-    placeholder="Phone Number"
-    value={customerPhone}
-    onChange={(e) => setCustomerPhone(e.target.value)}
-    className="
-      w-full
-      bg-[#161616]
-      border border-[#333]
-      rounded-2xl
-      px-5 py-4
-      text-white
-      outline-none
-    "
-  />
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={customerPhone}
+                onChange={(e) =>
+                  setCustomerPhone(e.target.value)
+                }
+                className="w-full bg-[#161616] border border-[#333] rounded-2xl px-5 py-4"
+              />
 
-</div>
+            </div>
 
-<div className="mt-10 border-t border-[#222] pt-8">
+            <div className="mt-10 border-t border-[#222] pt-8">
 
-  <h3 className="text-3xl font-black">
-    TOTAL: RM{total}
-  </h3>
+              <h3 className="text-3xl font-black">
+                TOTAL: RM{total}
+              </h3>
 
-  <button
-    onClick={() => {
+              <button
+                onClick={() => {
 
-      if (!customerName || !customerPhone) {
-        alert("Please fill in your details");
-        return;
-      }
+                  let message =
+                    `NEW ORDER - MAMASAN SCORPION\n\n`;
 
-      let message = `NEW ORDER - MAMASAN SCORPION\n\n`;
+                  cart.forEach((item) => {
 
-      cart.forEach((item) => {
+                    message +=
+                      `${item.quantity}x ${item.name} - RM${item.finalPrice * item.quantity}\n`;
 
-        message += `${item.quantity}x ${item.name}`;
+                  });
 
-        if (item.selectedDrinkType) {
-          message += ` (${item.selectedDrinkType})`;
-        }
+                  message += `\nTOTAL: RM${total}`;
+                  message += `\n\nNAME: ${customerName}`;
+                  message += `\nPHONE: ${customerPhone}`;
 
-        if (
-          item.selectedSyrup &&
-          item.selectedSyrup !== "No Syrup"
-        ) {
-          message += ` + ${item.selectedSyrup} Syrup`;
-        }
+                  window.open(
+                    `https://wa.me/60124478224?text=${encodeURIComponent(message)}`,
+                    "_blank"
+                  );
 
-        message += ` - RM${item.finalPrice * item.quantity}\n`;
+                }}
+                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+              >
+                CHECKOUT
+              </button>
 
-      });
-
-      message += `\nTOTAL: RM${total}`;
-      message += `\n\nNAME: ${customerName}`;
-      message += `\nPHONE: ${customerPhone}`;
-
-      window.open(
-        `https://wa.me/60124478224?text=${encodeURIComponent(message)}`,
-        "_blank"
-      );
-
-    }}
-    className="
-      mt-6
-      w-full
-      bg-[#c8a96b]
-      text-black
-      py-4
-      rounded-full
-      font-black
-      uppercase
-      hover:scale-105
-      transition
-    "
-  >
-    CHECKOUT
-  </button>
-
-</div>
+            </div>
 
           </div>
 

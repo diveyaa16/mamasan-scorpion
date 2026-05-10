@@ -552,14 +552,13 @@ const finalItem = {
     <main className="bg-black text-white min-h-screen overflow-x-hidden">
 
       {/* HERO */}
-      <section className="relative w-screen min-h-screen overflow-hidden">
-
-        <img
-          src="/hero-banner.jpeg"
-          className="w-full min-h-screen object-cover object-top"
-        />
-
-      </section>
+<section className="relative w-full overflow-hidden bg-[#f5ede3]">
+  <img
+    src="/hero-banner.jpeg"
+    alt="Mamasan Scorpion"
+    className="w-full h-auto block"
+  />
+</section>
 
       {/* FLOATING CART */}
       <button

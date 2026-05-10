@@ -197,11 +197,7 @@ export default function Home() {
       {/* TOP BAR */}
       <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b]">
 
-        <div className="flex items-center justify-between px-5 py-4">
-
-          <h2 className="text-[#c8a96b] font-black text-xl">
-            MENU
-          </h2>
+        <div className="flex items-center gap-4 px-5 py-4">
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -210,45 +206,49 @@ export default function Home() {
             ☰
           </button>
 
+          <h2 className="text-[#c8a96b] font-black text-xl">
+            MENU
+          </h2>
+
         </div>
 
         {menuOpen && (
 
-          <div className="border-t border-[#222] overflow-x-auto">
+  <div className="border-t border-[#222] bg-black">
 
-            <div className="flex whitespace-nowrap">
+    <div className="flex flex-col">
 
-              <button
-                onClick={() => {
-                  setActiveCategory("Home");
-                  setMenuOpen(false);
-                }}
-                className="px-5 py-4 text-[#c8a96b] font-black"
-              >
-                HOME
-              </button>
+      <button
+        onClick={() => {
+          setActiveCategory("Home");
+          setMenuOpen(false);
+        }}
+        className="px-5 py-4 text-left text-[#c8a96b] font-black border-b border-[#222]"
+      >
+        HOME
+      </button>
 
-              {categories.map((category) => (
+      {categories.map((category) => (
 
-                <button
-                  key={category}
-                  onClick={() => {
-                    setActiveCategory(category);
-                    setMenuOpen(false);
-                  }}
-                  className="px-5 py-4 text-[#c8a96b] font-black uppercase"
-                >
-                  {category}
-                </button>
+        <button
+          key={category}
+          onClick={() => {
+            setActiveCategory(category);
+            setMenuOpen(false);
+          }}
+          className="px-5 py-4 text-left text-[#c8a96b] font-black uppercase border-b border-[#222]"
+        >
+          {category}
+        </button>
 
-              ))}
+      ))}
 
-            </div>
+    </div>
 
-          </div>
+  </div>
 
-        )}
-
+)}
+           
       </div>
 
       {/* MENU */}

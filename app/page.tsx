@@ -551,13 +551,23 @@ const finalItem = {
 
     <main className="bg-black text-white min-h-screen overflow-x-hidden">
 
-      {/* HERO */}
+     {/* HERO */}
 <section className="relative w-full overflow-hidden bg-[#f5ede3]">
+
+  {/* Desktop & Tablet */}
   <img
     src="/hero-banner.jpeg"
     alt="Mamasan Scorpion"
-    className="w-full h-auto block"
+    className="hidden md:block w-full h-auto"
   />
+
+  {/* Mobile */}
+  <img
+    src="/hero-banner.jpeg"
+    alt="Mamasan Scorpion"
+    className="block md:hidden w-full h-auto object-contain"
+  />
+
 </section>
 
       {/* FLOATING CART */}

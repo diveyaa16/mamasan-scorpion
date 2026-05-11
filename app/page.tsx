@@ -14,10 +14,10 @@ const syrups = [
 const menuItems = [
   { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
 
-  { id: 51, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20 },
-{ id: 52, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
-{ id: 53, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
-{ id: 54, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
+  { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20 },
+{ id: 44, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
+{ id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
+{ id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
 
 { id: 47, category: "Omelette", name: "Chicken Cheese Omelette", price: 15 },
 { id: 48, category: "Omelette", name: "Bacon Cheese Omelette", price: 15 },

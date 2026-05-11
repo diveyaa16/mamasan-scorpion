@@ -102,7 +102,13 @@ export default function Home() {
     }, 1200);
   }, []);
 
-  const categories = [...new Set(menuItems.map((item) => item.category))];
+  const categories = [
+    "Home",
+    "Western",
+    "Local Food / Fusion",
+    "Coffee",
+    "Non-Coffee",
+  ];
   const coffeeItems = menuItems.filter(
   (item) => item.category === "Coffee"
 );
@@ -267,6 +273,14 @@ const decreaseQty = (index: number) => {
 
               {menuItems
                 .filter((item) => {
+  if (category === "Western") {
+    return ["Burgers", "Burger Roll", "Omelette", "Rotty Wrap", "Snacks"].includes(item.category);
+  }
+
+  if (category === "Local Food / Fusion") {
+    return ["Signature Rotty (4 PCS)", "Fried Rice & Noodles"].includes(item.category);
+  }
+
   if (category === "Coffee") {
     return item.category === "Coffee";
   }

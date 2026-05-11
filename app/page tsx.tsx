@@ -361,7 +361,7 @@ export default function Home() {
 
             <div className="space-y-4">
 
-              {cart.map((item, index) => (
+              {cart.map((item: any, index: number) => ( 
 
                 <div
                   key={index}

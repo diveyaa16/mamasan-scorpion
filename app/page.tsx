@@ -487,6 +487,10 @@ const decreaseQty = (index: number) => {
 
               <button
                 onClick={() => {
+                  if (!customerName || !customerPhone) {
+  alert("Please enter your name and phone number");
+  return;
+}
 
                   let message = `NEW ORDER - MAMASAN SCORPION\n\n`;
 

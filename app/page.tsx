@@ -66,14 +66,14 @@ const menuItems = [
   { id: 33, category: "Fresh Juice", name: "Apple Juice", price: 10 },
   { id: 34, category: "Fresh Juice", name: "Watermelon Juice", price: 10 },
 
-  { id: 35, category: "Hot & Cold", name: "Milo", price: 12, type: ["Hot", "Iced"] },
-  { id: 36, category: "Hot & Cold", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 37, category: "Hot & Cold", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 38, category: "Hot & Cold", name: "Chocolate", price: 12, type: ["Hot", "Iced"] },
-  { id: 39, category: "Hot & Cold", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
-  { id: 40, category: "Hot & Cold", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 41, category: "Hot & Cold", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 42, category: "Hot & Cold", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true,},
+  { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"] },
+  { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 37, category: "Coffee", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 38, category: "Non-Coffee", name: "Chocolate", price: 12, type: ["Hot", "Iced"] },
+  { id: 39, category: "Non-Coffee", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
+  { id: 40, category: "Coffee", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 41, category: "Coffee", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 42, category: "Coffee", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true,},
 
 ];
 
@@ -103,6 +103,13 @@ export default function Home() {
   }, []);
 
   const categories = [...new Set(menuItems.map((item) => item.category))];
+  const coffeeItems = menuItems.filter(
+  (item) => item.category === "Coffee"
+);
+
+const nonCoffeeItems = menuItems.filter(
+  (item) => item.category === "Non-Coffee"
+);
 
   const addToCart = (item: any) => {
     if (item.type && !selectedType[item.id]) {
@@ -259,7 +266,17 @@ const decreaseQty = (index: number) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
               {menuItems
-                .filter((item) => item.category === category)
+                .filter((item) => {
+  if (category === "Coffee") {
+    return item.category === "Coffee";
+  }
+
+  if (category === "Non-Coffee") {
+    return item.category === "Non-Coffee";
+  }
+
+  return item.category === category;
+})
                 .map((item) => (
 
                   <div

@@ -86,7 +86,7 @@ export default function Home() {
 
   const [cartOpen, setCartOpen] = useState(false);
 
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<any>([]);
 
   const [selectedType, setSelectedType] = useState<any>({});
 
@@ -147,7 +147,9 @@ const decreaseQty = (index: number) => {
 };
 
   const total = cart.reduce(
-    (sum, item) => sum + item.finalPrice * item.quantity,
+    (sum: number, item: any) =>
+      sum + (item.finalPrice || 0) * (item.quantity || 1),
+    
     0
   );
 
@@ -443,7 +445,7 @@ const decreaseQty = (index: number) => {
   </div>
 
   <p className="text-[#c8a96b] font-bold">
-    RM{item.finalPrice * item.quantity}
+    RM{(item.finalPrice || 0) * (item.quantity || 1)}
   </p>
 
 </div>

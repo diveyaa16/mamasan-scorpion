@@ -3,6 +3,14 @@
 
 import { useState, useEffect } from "react";
 
+const syrups = [ 
+  "No Syrup",
+  "Caramel",
+  "Vanilla",
+  "Hazelnut",
+  "Brown Sugar",
+];
+
 const menuItems = [
   { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
 

@@ -490,7 +490,7 @@ const decreaseQty = (index: number) => {
 
                   let message = `NEW ORDER - MAMASAN SCORPION\n\n`;
 
-                  cart.forEach((item) => {
+                  cart.forEach((item: any) => {
                     message += `${item.name} x${item.quantity} - RM${item.finalPrice * item.quantity}\n`;
                   });
 

@@ -492,10 +492,17 @@ const decreaseQty = (index: number) => {
   return;
 }
 
-                  let message = `NEW ORDER - MAMASAN SCORPION\n\n`;
+const orderNumber = Math.floor(1000 + Math.random() * 9000);
+                  let message = `NEW ORDER - MAMASAN SCORPION\n\nORDER #${orderNumber}\n\n`;
 
                   cart.forEach((item: any) => {
-                    message += `${item.name} x${item.quantity} - RM${item.finalPrice * item.quantity}\n`;
+                    message += `${item.name} (${item.selectedDrinkType || "Normal"})`;
+
+if (item.selectedSyrup) {
+  message += ` - ${item.selectedSyrup} Syrup`;
+}
+
+message += ` x${item.quantity} - RM${item.finalPrice}\n`;
                   });
 
                   message += `\nTOTAL: RM${total}`;

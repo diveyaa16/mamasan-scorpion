@@ -261,7 +261,7 @@ export default function Home() {
 
                     )}
 
-                    {item.syrup && (
+                    {(item as any) .syrup && ( 
 
                       <div className="mt-5">
 

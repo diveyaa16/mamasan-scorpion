@@ -102,6 +102,14 @@ export default function Home() {
 
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
+  const [extraChicken, setExtraChicken] = useState<any>({});
+
+  const [spicyOption, setSpicyOption] = useState<any>({});
+
+  const [mozzarellaOption, setMozzarellaOption] = useState<any>({});
+
+  const [curryOption, setCurryOption] = useState<any>({});
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -133,12 +141,21 @@ const nonCoffeeItems = menuItems.filter(
 
     const syrupPrice = syrupChoice !== "No Syrup" ? 3 : 0;
 
+    const spicyPrice = spicyOption[item.id] ? 1 : 0;
+
+    const burgerExtraPrice =
+  extraBurgerChicken[item.id] ? 6 : 0;
+
     const finalItem = {
       ...item,
       quantity: 1, 
       selectedDrinkType: selectedType[item.id],
       selectedSyrup: syrupChoice,
-      finalPrice: item.price + syrupPrice,
+      extraChicken: extraChicken[item.id] || false,
+      spicy: spicyOption[item.id] || false, 
+      extraBurgerChicken:
+  extraBurgerChicken[item.id] || false,
+      finalPrice: item.price + syrupPrice + spicyPrice + burgerExtraPrice ,
     };
 
     setCart([...cart, finalItem]);
@@ -443,6 +460,92 @@ const decreaseQty = (index: number) => {
                   <h3 className="font-black uppercase">
                     {item.name}
                   </h3>
+                  {(item.category === "Rice" || item.category === "Noodles") && (
+  <div className="mt-4 space-y-3">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={extraChicken[item.id] || false}
+        onChange={(e) =>
+          setExtraChicken({
+            ...extraChicken,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Extra Chicken
+    </label>
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={spicyOption[item.id] || false}
+        onChange={(e) =>
+          setSpicyOption({
+            ...spicyOption,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Spicy (+RM1)
+    </label>
+
+    {item.category === "Western" && (
+  <div className="mt-4 space-y-3">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={mozzarellaOption[item.id] || false}
+        onChange={(e) =>
+          setMozzarellaOption({
+            ...mozzarellaOption,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Mozzarella Cheese (+RM3)
+    </label>
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={curryOption[item.id] || false}
+        onChange={(e) =>
+          setCurryOption({
+            ...curryOption,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Curry (+RM5)
+    </label>
+
+    {item.name.toLowerCase().includes("burger") && (
+  <div className="mt-3">
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={extraBurgerChicken[item.id] || false}
+        onChange={(e) =>
+          setExtraBurgerChicken({
+            ...extraBurgerChicken,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+
+      Extra Crispy Chicken (+RM6)
+    </label>
+  </div>
+)}
+
+  </div>
+)}
+
+  </div>
+)}
 
                   {item.selectedDrinkType && (
                     <p className="text-sm text-gray-400 mt-1">
@@ -544,36 +647,7 @@ const decreaseQty = (index: number) => {
   </select>
 
 </div>
-              <select
-  value={orderType}
-  onChange={(e) => setOrderType(e.target.value)}
-  className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
->
-  <option>Pickup</option>
-  <option>Delivery</option>
-</select>
-
-{orderType === "Delivery" && (
-  <input
-    type="text"
-    placeholder="Room / Block Number"
-    value={deliveryAddress}
-    onChange={(e) => setDeliveryAddress(e.target.value)}
-    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
-  />
-)}
-
-<select
-  value={paymentMethod}
-  onChange={(e) => setPaymentMethod(e.target.value)}
-  className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
->
-  <option>Cash</option>
-  <option>Card</option>
-</select>
-
-            </div>
-
+  
             <div className="mt-10 border-t border-[#222] pt-8">
 
               <h3 className="text-3xl font-black">
@@ -596,6 +670,17 @@ const orderNumber = Math.floor(1000 + Math.random() * 9000);
 
                   cart.forEach((item: any) => {
   message += `${item.name}`;
+  if (item.extraChicken) {
+  message += `\n🍗 Extra Chicken`;
+}
+
+if (item.spicy) {
+  message += `\n🌶 Spicy`;
+}
+
+if (item.extraBurgerChicken) {
+  message += '\n🍔 Extra Crispy Chicken';
+}
 
   if (item.selectedDrinkType) {
     message += ` (${item.selectedDrinkType})`;

@@ -300,14 +300,14 @@ const decreaseQty = (index: number) => {
 
                     )}
 
-              {(item as any).syrup && ( 
+              {Boolean((item as any).syrup) && ( 
                       <div className="mt-5">
 
                         <p className="text-gray-400 text-sm mb-3">
                           ADD SYRUP (+RM3)
                         </p>
 
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2"> 
 
                           {syrups.map((syrup) => (
 

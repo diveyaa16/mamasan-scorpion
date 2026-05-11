@@ -496,14 +496,18 @@ const orderNumber = Math.floor(1000 + Math.random() * 9000);
                   let message = `NEW ORDER - MAMASAN SCORPION\n\nORDER #${orderNumber}\n\n`;
 
                   cart.forEach((item: any) => {
-                    message += `${item.name} (${item.selectedDrinkType || "Normal"})`;
+  message += `${item.name}`;
 
-if (item.selectedSyrup) {
-  message += ` - ${item.selectedSyrup} Syrup`;
-}
+  if (item.selectedDrinkType) {
+    message += ` (${item.selectedDrinkType})`;
+  }
 
-message += ` x${item.quantity} - RM${item.finalPrice}\n`;
-                  });
+  if (item.selectedSyrup && item.selectedSyrup !== "No Syrup") {
+    message += ` - ${item.selectedSyrup} Syrup`;
+  }
+
+  message += ` x${item.quantity} - RM${item.finalPrice}\n`;
+});
 
                   message += `\nTOTAL: RM${total}`;
 

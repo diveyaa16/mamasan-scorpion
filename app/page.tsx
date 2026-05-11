@@ -96,6 +96,12 @@ export default function Home() {
 
   const [customerPhone, setCustomerPhone] = useState("");
 
+  const [orderType, setOrderType] = useState("Pickup");
+
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
+
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -507,6 +513,64 @@ const decreaseQty = (index: number) => {
                 }
                 className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
               />
+              <div className="space-y-4 mt-4">
+
+  <select
+    value={orderType}
+    onChange={(e) => setOrderType(e.target.value)}
+    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+  >
+    <option value="Pickup">Pickup</option>
+    <option value="Delivery">Delivery</option>
+  </select>
+
+  {orderType === "Delivery" && (
+    <input
+      type="text"
+      placeholder="Block / Room Number"
+      value={deliveryAddress}
+      onChange={(e) => setDeliveryAddress(e.target.value)}
+      className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+    />
+  )}
+
+  <select
+    value={paymentMethod}
+    onChange={(e) => setPaymentMethod(e.target.value)}
+    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+  >
+    <option value="Cash">Cash</option>
+    <option value="Card">Card</option>
+  </select>
+
+</div>
+              <select
+  value={orderType}
+  onChange={(e) => setOrderType(e.target.value)}
+  className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
+>
+  <option>Pickup</option>
+  <option>Delivery</option>
+</select>
+
+{orderType === "Delivery" && (
+  <input
+    type="text"
+    placeholder="Room / Block Number"
+    value={deliveryAddress}
+    onChange={(e) => setDeliveryAddress(e.target.value)}
+    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
+  />
+)}
+
+<select
+  value={paymentMethod}
+  onChange={(e) => setPaymentMethod(e.target.value)}
+  className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 mb-4 outline-none"
+>
+  <option>Cash</option>
+  <option>Card</option>
+</select>
 
             </div>
 
@@ -519,6 +583,10 @@ const decreaseQty = (index: number) => {
               <button
                 onClick={() => {
                   if (!customerName || !customerPhone) {
+                    if (orderType === "Delivery" && total < 30) {
+  alert("Delivery only available for orders RM30 and above");
+  return;
+}
   alert("Please enter your name and phone number");
   return;
 }
@@ -545,6 +613,14 @@ const orderNumber = Math.floor(1000 + Math.random() * 9000);
                   message += `\n\nNAME: ${customerName}`;
 
                   message += `\nPHONE: ${customerPhone}`;
+
+                  message += `\nORDER TYPE: ${orderType}`;
+
+                  message += `\nPAYMENT: ${paymentMethod}`;
+
+if (orderType === "Delivery") {
+  message += `\nDELIVERY LOCATION: ${deliveryAddress}`;
+}
 
                   window.open(
                     `https://wa.me/60124478224?text=${encodeURIComponent(message)}`,

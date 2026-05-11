@@ -300,7 +300,7 @@ const decreaseQty = (index: number) => {
 
                     )}
 
-                    {item.syrup && (
+                    {"syrup" in item && item.syrup && (
 
                       <div className="mt-5">
 

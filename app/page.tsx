@@ -207,7 +207,7 @@ const decreaseQty = (index: number) => {
   }
 
   return (
-    <main className="bg-black text-white min-h-screen">
+     <main className="bg-black text-white min-h-screen" >
 
       {/* HERO */}
       <section className="bg-[#f5ede3]">
@@ -460,7 +460,7 @@ const decreaseQty = (index: number) => {
                   <h3 className="font-black uppercase">
                     {item.name}
                   </h3>
-                  {(item.category === "Rice" || item.category === "Noodles") && (
+                  {item.category === "Fried Rice & Noodles" && (
   <div className="mt-4 space-y-3">
 
     <label className="flex items-center gap-3 text-sm">
@@ -545,7 +545,7 @@ const decreaseQty = (index: number) => {
 )}
 
   </div>
-)}
+)}   
 
                   {item.selectedDrinkType && (
                     <p className="text-sm text-gray-400 mt-1">
@@ -712,7 +712,7 @@ if (orderType === "Delivery") {
                     "_blank"
                   );
 
-                }}
+                  }}
                 className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
               >
                 Checkout
@@ -723,9 +723,8 @@ if (orderType === "Delivery") {
           </div>
 
         </div>
-
-      )}
-
-    </main>
+        </div>
+</main>
   );
+            
 }

@@ -649,7 +649,7 @@ export default function Home() {
   className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none text-white"
 >
   <option value="" disabled>
-    Select Order Type ▼
+    Select Order Type ^
   </option>
 
   <option value="Pickup">Pickup</option>

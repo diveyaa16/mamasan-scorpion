@@ -293,7 +293,6 @@ export default function Home() {
                     "Burger Roll",
                     "Omelette",
                     "Rotty Wrap",
-                    "Snacks",
                   ].includes(item.category);
                 }
 
@@ -555,6 +554,24 @@ export default function Home() {
                   {item.name}
                 </h3>
 
+                {item.extraProtein && (
+  <p className="text-sm text-gray-400">
+    + Extra Protein
+  </p>
+)}
+
+{item.extraBurgerChicken && (
+  <p className="text-sm text-gray-400">
+    + Extra Crispy Chicken
+  </p>
+)}
+
+{item.mozzarella && (
+  <p className="text-sm text-gray-400">
+    + Mozzarella Cheese
+  </p>
+)}
+
                 {item.selectedDrinkType && (
                   <p className="text-sm text-gray-400 mt-1">
                     {item.selectedDrinkType}
@@ -627,13 +644,17 @@ export default function Home() {
             />
 
             <select
-              value={orderType}
-              onChange={(e) => setOrderType(e.target.value)}
-              className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-            >
-              <option value="Pickup">Pickup</option>
-              <option value="Delivery">Delivery</option>
-            </select>
+  value={orderType}
+  onChange={(e) => setOrderType(e.target.value)}
+  className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none text-white"
+>
+  <option value="" disabled>
+    Select Order Type ▼
+  </option>
+
+  <option value="Pickup">Pickup</option>
+  <option value="Delivery">Delivery</option>
+</select>
 
             {orderType === "Delivery" && (
               <input
@@ -662,11 +683,67 @@ export default function Home() {
                 TOTAL: RM{total}
               </h3>
 
-              <button
-                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-              >
-                Checkout
-              </button>
+             <button
+  onClick={() => {
+
+    let message = "NEW ORDER - MAMASAN SCORPION\n\n";
+
+    cart.forEach((item: any) => {
+      message += `${item.name} - RM${item.finalPrice}\n`;
+
+      if (item.extraProtein) {
+        message += " + Extra Protein\n";
+      }
+
+      if (item.extraBurgerChicken) {
+        message += " + Extra Crispy Chicken\n";
+      }
+
+      if (item.mozzarella) {
+        message += " + Mozzarella Cheese\n";
+      }
+
+      if (item.selectedDrinkType) {
+        message += ` + ${item.selectedDrinkType}\n`;
+      }
+
+      if (
+        item.selectedSyrup &&
+        item.selectedSyrup !== "No Syrup"
+      ) {
+        message += ` + ${item.selectedSyrup} Syrup\n`;
+      }
+
+      message += "\n";
+    });
+
+    message += `TOTAL: RM${total}\n\n`;
+
+    message += `NAME: ${customerName}\n`;
+
+    message += `PHONE: ${customerPhone}\n`;
+
+    message += `ORDER TYPE: ${orderType}\n`;
+
+    if (orderType === "Delivery") {
+      message += `ADDRESS: ${deliveryAddress}\n`;
+    }
+
+    message += `PAYMENT: ${paymentMethod}`;
+
+    const whatsappMessage =
+      encodeURIComponent(message);
+
+    window.open(
+      `https://wa.me/60124478224?text=${whatsappMessage}`,
+      "_blank"
+    );
+  }}
+
+  className="mt-6 w-full bg-[#c8a96b] text-black font-black py-4 rounded-2xl"
+>
+  Checkout
+</button>
 
             </div>
 

@@ -31,13 +31,9 @@ const menuItems = [
   { id: 5, category: "Signature Rotty (4 PCS)", name: "Chocolate Rotty", price: 12 },
 
   { id: 6, category: "Fried Rice & Noodles", name: "Chicken Rice", price: 12 },
-  { id: 7, category: "Fried Rice & Noodles", name: "Chicken Spicy Rice", price: 12 },
-  { id: 8, category: "Fried Rice & Noodles", name: "Extra Chicken Rice", price: 17 },
   { id: 9, category: "Fried Rice & Noodles", name: "Egg Rice", price: 12 },
 
   { id: 10, category: "Fried Rice & Noodles", name: "Chicken Noodles", price: 12 },
-  { id: 11, category: "Fried Rice & Noodles", name: "Chicken Spicy Noodles", price: 12 },
-  { id: 12, category: "Fried Rice & Noodles", name: "Extra Chicken Noodles", price: 17 },
   { id: 13, category: "Fried Rice & Noodles", name: "Egg Noodles", price: 12 },
 
   { id: 14, category: "Snacks", name: "Fries", price: 10 },
@@ -309,6 +305,60 @@ export default function Home() {
                   <h3 className="text-2xl font-black uppercase">
                     {item.name}
                   </h3>
+
+                  {item.category === "Fried Rice & Noodles" && (
+  <div className="mt-4 space-y-3">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={extraChicken[item.id] || false}
+        onChange={(e) =>
+          setExtraChicken({
+            ...extraChicken,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Extra Chicken (+RM5)
+    </label>
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={spicyOption[item.id] || false}
+        onChange={(e) =>
+          setSpicyOption({
+            ...spicyOption,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Spicy (+RM1)
+    </label>
+
+  </div>
+)}
+
+{item.name.toLowerCase().includes("burger") && (
+  <div className="mt-4">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={extraBurgerChicken[item.id] || false}
+        onChange={(e) =>
+          setExtraBurgerChicken({
+            ...extraBurgerChicken,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Extra Crispy Chicken (+RM6)
+    </label>
+
+  </div>
+)}
 
                   {/* HOT / ICED */}
                   {item.type && (

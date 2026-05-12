@@ -264,7 +264,6 @@ export default function Home() {
             "Signature Rotty (4 PCS)",
             "Snacks",
             "Fried Rice & Noodles",
-            "Snacks",
             "Milkshakes",
             "Protein Shakes",
             "Fresh Juices",

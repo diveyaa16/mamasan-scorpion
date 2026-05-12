@@ -309,19 +309,21 @@ export default function Home() {
                   {item.category === "Fried Rice & Noodles" && (
   <div className="mt-4 space-y-3">
 
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={extraChicken[item.id] || false}
-        onChange={(e) =>
-          setExtraChicken({
-            ...extraChicken,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-      Extra Chicken (+RM5)
-    </label>
+   {!item.name.toLowerCase().includes("egg") && (
+  <label className="flex items-center gap-3 text-sm">
+    <input
+      type="checkbox"
+      checked={extraChicken[item.id] || false}
+      onChange={(e) =>
+        setExtraChicken({
+          ...extraChicken,
+          [item.id]: e.target.checked,
+        })
+      }
+    />
+    Extra Chicken (+RM5)
+  </label>
+)}
 
     <label className="flex items-center gap-3 text-sm">
       <input

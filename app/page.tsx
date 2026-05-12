@@ -491,7 +491,7 @@ const decreaseQty = (index: number) => {
       Spicy (+RM1)
     </label>
 
-    {item.category === "Western" && (
+    {["Burgers", "Burger Roll", "Omelette", "Rotty Wrap", "Snacks"].includes(item.category) && (
   <div className="mt-4 space-y-3">
 
     <label className="flex items-center gap-3 text-sm">

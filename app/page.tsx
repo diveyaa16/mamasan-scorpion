@@ -287,7 +287,7 @@ export default function Home() {
             {menuItems
               .filter((item) => {
 
-                if (activeCategory === "Western") {
+                if (category === "Western") {
                   return [
                     "Burgers",
                     "Burger Roll",
@@ -297,7 +297,7 @@ export default function Home() {
                   ].includes(item.category);
                 }
 
-                if (activeCategory === "Local Food / Fusion") {
+                if (category === "Local Food / Fusion") {
                   return [
                     "Signature Rotty (4 PCS)",
                     "Fried Rice & Noodles",

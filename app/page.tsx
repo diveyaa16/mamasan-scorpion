@@ -304,6 +304,12 @@ export default function Home() {
                   ].includes(item.category);
                 }
 
+                if (category === "Fresh Juices") {
+  return [
+    "Fresh Juices",
+  ].includes(item.category);
+}
+
                 return item.category === category;
               })
 

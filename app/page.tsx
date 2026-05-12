@@ -110,6 +110,7 @@ export default function Home() {
 
   const [curryOption, setCurryOption] = useState<any>({});
 
+  const [extraBurgerChicken, setExtraBurgerChicken] = useState<any>({});
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -143,8 +144,7 @@ const nonCoffeeItems = menuItems.filter(
 
     const spicyPrice = spicyOption[item.id] ? 1 : 0;
 
-    const burgerExtraPrice =
-  extraBurgerChicken[item.id] ? 6 : 0;
+    const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
 
     const finalItem = {
       ...item,
@@ -154,7 +154,7 @@ const nonCoffeeItems = menuItems.filter(
       extraChicken: extraChicken[item.id] || false,
       spicy: spicyOption[item.id] || false, 
       extraBurgerChicken:
-  extraBurgerChicken[item.id] || false,
+        extraBurgerChicken[item.id] || false,
       finalPrice: item.price + syrupPrice + spicyPrice + burgerExtraPrice ,
     };
 

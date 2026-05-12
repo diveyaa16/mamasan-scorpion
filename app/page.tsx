@@ -191,119 +191,389 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-black text-white min-h-screen">
+  <main className="bg-black text-white min-h-screen">
 
-      <section className="bg-[#f5ede3]">
-        <img
-          src="/hero-banner.jpeg"
-          alt="Mamasan Scorpion"
-          className="w-full h-auto"
-        />
-      </section>
+    {/* HERO */}
+    <section className="bg-[#f5ede3]">
+      <img
+        src="/hero-banner.jpeg"
+        alt="Mamasan Scorpion"
+        className="w-full h-auto"
+      />
+    </section>
 
-      <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b]">
+    {/* TOP BAR */}
+    <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b]">
 
-        <div className="flex items-center gap-4 px-5 py-4">
+      <div className="flex items-center gap-4 px-5 py-4">
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-[#c8a96b] text-3xl"
-          >
-            ☰
-          </button>
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="text-[#c8a96b] text-3xl"
+        >
+          ☰
+        </button>
 
-          <h2 className="text-[#c8a96b] font-black text-xl">
-            MENU
+        <h2 className="text-[#c8a96b] font-black text-xl">
+          MENU
+        </h2>
+
+      </div>
+
+      {menuOpen && (
+
+        <div className="border-t border-[#222] bg-black">
+
+          <div className="flex flex-col">
+
+            {categories.map((category) => (
+
+              <button
+                key={category}
+                onClick={() => {
+                  setActiveCategory(category);
+                  setMenuOpen(false);
+                }}
+                className="px-5 py-4 text-left text-[#c8a96b] font-black uppercase border-b border-[#222]"
+              >
+                {category}
+              </button>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      )}
+
+    </div>
+
+    {/* MENU */}
+    <section className="p-6 bg-[#050505]">
+
+      {(activeCategory === "Home"
+        ? [
+            "Burgers",
+            "Burger Roll",
+            "Omelette",
+            "Rotty Wrap",
+            "Signature Rotty (4 PCS)",
+            "Snacks",
+            "Fried Rice & Noodles",
+          ]
+        : [activeCategory]
+      ).map((category) => (
+
+        <div
+          key={category}
+          className="mb-16"
+        >
+
+          <h2 className="text-4xl font-black uppercase mb-8 text-[#c8a96b]">
+            {category}
           </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {menuItems
+              .filter((item) => {
+
+                if (activeCategory === "Western") {
+                  return [
+                    "Burgers",
+                    "Burger Roll",
+                    "Omelette",
+                    "Rotty Wrap",
+                    "Snacks",
+                  ].includes(item.category);
+                }
+
+                if (activeCategory === "Local Food / Fusion") {
+                  return [
+                    "Signature Rotty (4 PCS)",
+                    "Fried Rice & Noodles",
+                  ].includes(item.category);
+                }
+
+                return item.category === category;
+              })
+
+              .map((item) => (
+
+                <div
+                  key={item.id}
+                  className="bg-[#111] border border-[#222] rounded-3xl p-6"
+                >
+
+                  <h3 className="text-2xl font-black uppercase">
+                    {item.name}
+                  </h3>
+
+                  {/* HOT / ICED */}
+                  {item.type && (
+
+                    <div className="flex gap-2 mt-4">
+
+                      {item.type.map((drinkType: string) => (
+
+                        <button
+                          key={drinkType}
+                          onClick={() =>
+                            setSelectedType({
+                              ...selectedType,
+                              [item.id]: drinkType,
+                            })
+                          }
+                          className={`px-3 py-1 rounded-full text-sm font-bold ${
+                            selectedType[item.id] === drinkType
+                              ? "bg-[#c8a96b] text-black"
+                              : "bg-[#222]"
+                          }`}
+                        >
+                          {drinkType}
+                        </button>
+
+                      ))}
+
+                    </div>
+
+                  )}
+
+                  {/* SYRUPS */}
+                  {item.syrup && (
+
+                    <div className="mt-5">
+
+                      <p className="text-gray-400 text-sm mb-3">
+                        ADD SYRUP (+RM3)
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+
+                        {syrups.map((syrup) => (
+
+                          <button
+                            key={syrup}
+                            onClick={() =>
+                              setSelectedSyrup({
+                                ...selectedSyrup,
+                                [item.id]: syrup,
+                              })
+                            }
+                            className={`px-3 py-1 rounded-full text-sm font-bold ${
+                              selectedSyrup[item.id] === syrup
+                                ? "bg-[#c8a96b] text-black"
+                                : "bg-[#222]"
+                            }`}
+                          >
+                            {syrup}
+                          </button>
+
+                        ))}
+
+                      </div>
+
+                    </div>
+
+                  )}
+
+                  <p className="text-[#c8a96b] text-3xl font-black mt-6">
+                    RM{item.price}
+                  </p>
+
+                  <button
+                    onClick={() => addToCart(item)}
+                    className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+                  >
+                    Add To Cart
+                  </button>
+
+                </div>
+
+              ))}
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </section>
+
+    {/* FLOATING CART */}
+    <button
+      onClick={() => setCartOpen(true)}
+      className="fixed bottom-6 right-6 bg-[#c8a96b] text-black w-16 h-16 rounded-full text-2xl z-50 flex items-center justify-center"
+    >
+      🛒
+
+      {cart.length > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+          {cart.length}
+        </span>
+      )}
+
+    </button>
+
+    {/* CART */}
+    {cartOpen && (
+
+      <div className="fixed inset-0 bg-black/70 z-[9999] flex justify-end">
+
+        <div className="w-full max-w-md bg-[#111] h-screen overflow-y-auto p-6">
+
+          <div className="flex justify-between items-center mb-8">
+
+            <h2 className="text-4xl font-black">
+              CART
+            </h2>
+
+            <button
+              onClick={() => setCartOpen(false)}
+              className="text-3xl"
+            >
+              ✕
+            </button>
+
+          </div>
+
+          <div className="space-y-4">
+
+            {cart.map((item: any, index: number) => (
+
+              <div
+                key={index}
+                className="bg-[#1a1a1a] p-5 rounded-3xl"
+              >
+
+                <h3 className="font-black uppercase">
+                  {item.name}
+                </h3>
+
+                {item.selectedDrinkType && (
+                  <p className="text-sm text-gray-400 mt-1">
+                    {item.selectedDrinkType}
+                  </p>
+                )}
+
+                {item.selectedSyrup !== "No Syrup" && (
+                  <p className="text-sm text-[#c8a96b] mt-1">
+                    {item.selectedSyrup} Syrup
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between mt-4">
+
+                  <div className="flex items-center gap-3">
+
+                    <button
+                      onClick={() => decreaseQty(index)}
+                      className="bg-[#222] w-8 h-8 rounded-full"
+                    >
+                      -
+                    </button>
+
+                    <span className="font-bold">
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() => increaseQty(index)}
+                      className="bg-[#c8a96b] text-black w-8 h-8 rounded-full"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                  <p className="text-[#c8a96b] font-bold">
+                    RM{(item.finalPrice || 0) * (item.quantity || 1)}
+                  </p>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+          {/* CUSTOMER INFO */}
+          <div className="mt-8 space-y-4">
+
+            <input
+              type="text"
+              placeholder="Customer Name"
+              value={customerName}
+              onChange={(e) =>
+                setCustomerName(e.target.value)
+              }
+              className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+            />
+
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={customerPhone}
+              onChange={(e) =>
+                setCustomerPhone(e.target.value)
+              }
+              className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+            />
+
+            <select
+              value={orderType}
+              onChange={(e) => setOrderType(e.target.value)}
+              className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+            >
+              <option value="Pickup">Pickup</option>
+              <option value="Delivery">Delivery</option>
+            </select>
+
+            {orderType === "Delivery" && (
+              <input
+                type="text"
+                placeholder="Block / Room Number"
+                value={deliveryAddress}
+                onChange={(e) =>
+                  setDeliveryAddress(e.target.value)
+                }
+                className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+              />
+            )}
+
+            <select
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+              className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
+            >
+              <option value="Cash">Cash</option>
+              <option value="Card">Card</option>
+            </select>
+
+            <div className="mt-10 border-t border-[#222] pt-8">
+
+              <h3 className="text-3xl font-black">
+                TOTAL: RM{total}
+              </h3>
+
+              <button
+                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+              >
+                Checkout
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
       </div>
 
-    {/* MENU */}
-<section className="p-6 bg-[#050505]">
+    )}
 
-  {(activeCategory === "Home"
-    ? categories
-    : [activeCategory]
-  ).map((category) => (
-
-    <div
-      key={category}
-      className="mb-16"
-    >
-
-      <h2 className="text-4xl font-black uppercase mb-8 text-[#c8a96b]">
-        {category}
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        {menuItems
-          .filter((item) => {
-
-            if (category === "Western") {
-              return [
-                "Burgers",
-                "Burger Roll",
-                "Omelette",
-                "Rotty Wrap",
-                "Snacks",
-              ].includes(item.category);
-            }
-
-            if (category === "Local Food / Fusion") {
-              return [
-                "Signature Rotty (4 PCS)",
-                "Fried Rice & Noodles",
-              ].includes(item.category);
-            }
-
-            if (category === "Coffee") {
-              return item.category === "Coffee";
-            }
-
-            if (category === "Non-Coffee") {
-              return item.category === "Non-Coffee";
-            }
-
-            return item.category === category;
-          })
-
-          .map((item) => (
-
-            <div
-              key={item.id}
-              className="bg-[#111] border border-[#222] rounded-3xl p-6"
-            >
-
-              <h3 className="text-2xl font-black uppercase">
-                {item.name}
-              </h3>
-
-              <p className="text-[#c8a96b] text-3xl font-black mt-6">
-                RM{item.price}
-              </p>
-
-              <button
-                onClick={() => addToCart(item)}
-                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-              >
-                Add To Cart
-              </button>
-
-            </div>
-
-          ))}
-
-      </div>
-
-    </div>
-
-  ))}
-
-</section>
-
-</main>
+  </main>
 );
 }

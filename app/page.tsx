@@ -545,7 +545,7 @@ const decreaseQty = (index: number) => {
 )}
 
   </div>
-)}   
+))}   
 
                   {item.selectedDrinkType && (
                     <p className="text-sm text-gray-400 mt-1">

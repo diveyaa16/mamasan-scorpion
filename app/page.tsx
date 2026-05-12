@@ -539,13 +539,13 @@ const decreaseQty = (index: number) => {
       Extra Crispy Chicken (+RM6)
     </label>
   </div>
-)}
+    )}
 
   </div>
-)}
+    )} 
 
   </div>
-))}   
+}   
 
                   {item.selectedDrinkType && (
                     <p className="text-sm text-gray-400 mt-1">

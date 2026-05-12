@@ -59,7 +59,7 @@ const menuItems = [
 
   { id: 32, category: "Fresh Juices", name: "Orange Juice", price: 10 },
   { id: 33, category: "Fresh Juices", name: "Apple Juice", price: 10 },
-  { id: 34, category: "Fresh Juice", name: "Watermelon Juice", price: 10 },
+  { id: 34, category: "Fresh Juices", name: "Watermelon Juice", price: 10 },
 
   { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"] },
   { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true },

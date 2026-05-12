@@ -18,9 +18,9 @@ const menuItems = [
   { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
   { id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
 
-  { id: 47, category: "Omelette", name: "Chicken Cheese Omelette", price: 15 },
-  { id: 48, category: "Omelette", name: "Bacon Cheese Omelette", price: 15 },
-  { id: 49, category: "Omelette", name: "Ham Cheese Omelette", price: 15 },
+  { id: 47, category: "Omelette", name: "Chicken Omelette", price: 15 },
+  { id: 48, category: "Omelette", name: "Bacon Omelette", price: 15 },
+  { id: 49, category: "Omelette", name: "Ham Omelette", price: 15 },
   { id: 50, category: "Omelette", name: "Rotty Omelette", price: 20 },
   { id: 51, category: "Omelette", name: "Lot Omelette", price: 20 },
 
@@ -117,7 +117,7 @@ export default function Home() {
 
     const syrupPrice = syrupChoice !== "No Syrup" ? 3 : 0;
     const spicyPrice = spicyOption[item.id] ? 1 : 0;
-    const mozzarellaPrice = mozzarellaOption[item.id] ? 3 : 0;
+    const mozzarellaPrice = mozzarellaOption[item.id] ? 5 : 0;
     const curryPrice = curryOption[item.id] ? 5 : 0;
     const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
 
@@ -257,7 +257,13 @@ export default function Home() {
             "Signature Rotty (4 PCS)",
             "Snacks",
             "Fried Rice & Noodles",
-          ]
+            "Snacks",
+            "Milkshakes",
+            "Protein Shakes",
+            "Fresh Juices",
+            "Coffee",
+            "Non-Coffee",
+                  ]
         : [activeCategory]
       ).map((category) => (
 
@@ -305,6 +311,26 @@ export default function Home() {
                   <h3 className="text-2xl font-black uppercase">
                     {item.name}
                   </h3>
+
+                  {item.category === "Omelette" && (
+  <div className="mt-4 space-y-3">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={mozzarellaOption[item.id] || false}
+        onChange={(e) =>
+          setMozzarellaOption({
+            ...mozzarellaOption,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Mozzarella Cheese (+RM5)
+    </label>
+
+  </div>
+)}
 
                   {item.category === "Fried Rice & Noodles" && (
   <div className="mt-4 space-y-3">

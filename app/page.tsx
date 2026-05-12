@@ -86,6 +86,7 @@ export default function Home() {
   const [mozzarellaOption, setMozzarellaOption] = useState<any>({});
   const [curryOption, setCurryOption] = useState<any>({});
   const [extraBurgerChicken, setExtraBurgerChicken] = useState<any>({});
+  const [extraProtein, setExtraProtein] = useState<any>({});
 
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -103,6 +104,9 @@ export default function Home() {
     "Home",
     "Western",
     "Local Food / Fusion",
+    "Snacks",
+    "Milkshakes",
+    "Protein Shakes",
     "Coffee",
     "Non-Coffee",
   ];
@@ -120,6 +124,7 @@ export default function Home() {
     const mozzarellaPrice = mozzarellaOption[item.id] ? 5 : 0;
     const curryPrice = curryOption[item.id] ? 5 : 0;
     const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
+    const extraProteinPrice = extraProtein[item.id] ? 5 : 0;
 
     const finalPrice =
       item.price +
@@ -127,6 +132,7 @@ export default function Home() {
       spicyPrice +
       mozzarellaPrice +
       curryPrice +
+      extraProteinPrice + 
       burgerExtraPrice;
 
     const finalItem = {
@@ -139,6 +145,7 @@ export default function Home() {
       mozzarella: mozzarellaOption[item.id] || false,
       curry: curryOption[item.id] || false,
       extraBurgerChicken: extraBurgerChicken[item.id] || false,
+      extraProtein: extraProtein[item.id] || false,
       finalPrice,
     };
 
@@ -311,6 +318,26 @@ export default function Home() {
                   <h3 className="text-2xl font-black uppercase">
                     {item.name}
                   </h3>
+
+                  {item.category === "Protein Shakes" && (
+  <div className="mt-4 space-y-3">
+
+    <label className="flex items-center gap-3 text-sm">
+      <input
+        type="checkbox"
+        checked={extraProtein[item.id] || false}
+        onChange={(e) =>
+          setExtraProtein({
+            ...extraProtein,
+            [item.id]: e.target.checked,
+          })
+        }
+      />
+      Extra Protein (+RM5)
+    </label>
+
+  </div>
+)}
 
                   {item.category === "Omelette" && (
   <div className="mt-4 space-y-3">

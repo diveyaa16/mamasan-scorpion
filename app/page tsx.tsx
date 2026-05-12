@@ -431,6 +431,33 @@ export default function Home() {
 
                   cart.forEach((item) => {
                     message += `${item.name} - RM${item.finalPrice}\n`;
+                    if (item.extraChicken) {
+  message += '  + Extra Chicken\n';
+}
+
+if (item.spicy) {
+  message += '  + Spicy\n';
+}
+
+if (item.extraBurgerChicken) {
+  message += '  + Extra Crispy Chicken\n';
+}
+
+if (item.extraProtein) {
+  message += '  + Extra Protein\n';
+}
+
+if (item.mozzarella) {
+  message += '  + Mozzarella Cheese\n';
+}
+
+if (item.selectedDrinkType) {
+  message += `  + ${item.selectedDrinkType}\n`;
+}
+
+if (item.selectedSyrup && item.selectedSyrup !== "No Syrup") {
+  message += `  + ${item.selectedSyrup} Syrup\n`;
+}
                   });
 
                   message += `\nTOTAL: RM${total}`;

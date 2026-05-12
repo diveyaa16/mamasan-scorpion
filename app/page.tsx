@@ -220,6 +220,90 @@ export default function Home() {
 
       </div>
 
-    </main>
-  );
+    {/* MENU */}
+<section className="p-6 bg-[#050505]">
+
+  {(activeCategory === "Home"
+    ? categories
+    : [activeCategory]
+  ).map((category) => (
+
+    <div
+      key={category}
+      className="mb-16"
+    >
+
+      <h2 className="text-4xl font-black uppercase mb-8 text-[#c8a96b]">
+        {category}
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        {menuItems
+          .filter((item) => {
+
+            if (category === "Western") {
+              return [
+                "Burgers",
+                "Burger Roll",
+                "Omelette",
+                "Rotty Wrap",
+                "Snacks",
+              ].includes(item.category);
+            }
+
+            if (category === "Local Food / Fusion") {
+              return [
+                "Signature Rotty (4 PCS)",
+                "Fried Rice & Noodles",
+              ].includes(item.category);
+            }
+
+            if (category === "Coffee") {
+              return item.category === "Coffee";
+            }
+
+            if (category === "Non-Coffee") {
+              return item.category === "Non-Coffee";
+            }
+
+            return item.category === category;
+          })
+
+          .map((item) => (
+
+            <div
+              key={item.id}
+              className="bg-[#111] border border-[#222] rounded-3xl p-6"
+            >
+
+              <h3 className="text-2xl font-black uppercase">
+                {item.name}
+              </h3>
+
+              <p className="text-[#c8a96b] text-3xl font-black mt-6">
+                RM{item.price}
+              </p>
+
+              <button
+                onClick={() => addToCart(item)}
+                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+              >
+                Add To Cart
+              </button>
+
+            </div>
+
+          ))}
+
+      </div>
+
+    </div>
+
+  ))}
+
+</section>
+
+</main>
+);
 }

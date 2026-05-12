@@ -1,5 +1,4 @@
 "use client";
-//update 
 
 import { useState, useEffect } from "react";
 
@@ -15,15 +14,15 @@ const menuItems = [
   { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
 
   { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20 },
-{ id: 44, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
-{ id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
-{ id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
+  { id: 44, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
+  { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
+  { id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
 
-{ id: 47, category: "Omelette", name: "Chicken Cheese Omelette", price: 15 },
-{ id: 48, category: "Omelette", name: "Bacon Cheese Omelette", price: 15 },
-{ id: 49, category: "Omelette", name: "Ham Cheese Omelette", price: 15 },
-{ id: 50, category: "Omelette", name: "Rotty Omelette", price: 20 },
-{ id: 51, category: "Omelette", name: "Lot Omelette" , price: 20},
+  { id: 47, category: "Omelette", name: "Chicken Cheese Omelette", price: 15 },
+  { id: 48, category: "Omelette", name: "Bacon Cheese Omelette", price: 15 },
+  { id: 49, category: "Omelette", name: "Ham Cheese Omelette", price: 15 },
+  { id: 50, category: "Omelette", name: "Rotty Omelette", price: 20 },
+  { id: 51, category: "Omelette", name: "Lot Omelette", price: 20 },
 
   { id: 2, category: "Rotty Wrap", name: "Chicken Wrap", price: 23 },
   { id: 3, category: "Rotty Wrap", name: "Bacon Wrap", price: 23 },
@@ -67,50 +66,37 @@ const menuItems = [
   { id: 34, category: "Fresh Juice", name: "Watermelon Juice", price: 10 },
 
   { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"] },
-  { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 37, category: "Coffee", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true,},
+  { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true },
+  { id: 37, category: "Coffee", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true },
   { id: 38, category: "Non-Coffee", name: "Chocolate", price: 12, type: ["Hot", "Iced"] },
   { id: 39, category: "Non-Coffee", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
-  { id: 40, category: "Coffee", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 41, category: "Coffee", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true,},
-  { id: 42, category: "Coffee", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true,},
-
+  { id: 40, category: "Coffee", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true },
+  { id: 41, category: "Coffee", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true },
+  { id: 42, category: "Coffee", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true },
 ];
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [activeCategory, setActiveCategory] = useState("Home");
-
   const [cartOpen, setCartOpen] = useState(false);
 
-  const [cart, setCart] = useState<any>([]);
+  const [cart, setCart] = useState<any[]>([]);
 
   const [selectedType, setSelectedType] = useState<any>({});
-
   const [selectedSyrup, setSelectedSyrup] = useState<any>({});
+  const [extraChicken, setExtraChicken] = useState<any>({});
+  const [spicyOption, setSpicyOption] = useState<any>({});
+  const [mozzarellaOption, setMozzarellaOption] = useState<any>({});
+  const [curryOption, setCurryOption] = useState<any>({});
+  const [extraBurgerChicken, setExtraBurgerChicken] = useState<any>({});
 
   const [customerName, setCustomerName] = useState("");
-
   const [customerPhone, setCustomerPhone] = useState("");
-
   const [orderType, setOrderType] = useState("Pickup");
-
   const [paymentMethod, setPaymentMethod] = useState("Cash");
-
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
-  const [extraChicken, setExtraChicken] = useState<any>({});
-
-  const [spicyOption, setSpicyOption] = useState<any>({});
-
-  const [mozzarellaOption, setMozzarellaOption] = useState<any>({});
-
-  const [curryOption, setCurryOption] = useState<any>({});
-
-  const [extraBurgerChicken, setExtraBurgerChicken] = useState<any>({});
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -124,13 +110,6 @@ export default function Home() {
     "Coffee",
     "Non-Coffee",
   ];
-  const coffeeItems = menuItems.filter(
-  (item) => item.category === "Coffee"
-);
-
-const nonCoffeeItems = menuItems.filter(
-  (item) => item.category === "Non-Coffee"
-);
 
   const addToCart = (item: any) => {
     if (item.type && !selectedType[item.id]) {
@@ -141,51 +120,56 @@ const nonCoffeeItems = menuItems.filter(
     const syrupChoice = selectedSyrup[item.id] || "No Syrup";
 
     const syrupPrice = syrupChoice !== "No Syrup" ? 3 : 0;
-
     const spicyPrice = spicyOption[item.id] ? 1 : 0;
-
+    const mozzarellaPrice = mozzarellaOption[item.id] ? 3 : 0;
+    const curryPrice = curryOption[item.id] ? 5 : 0;
     const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
+
+    const finalPrice =
+      item.price +
+      syrupPrice +
+      spicyPrice +
+      mozzarellaPrice +
+      curryPrice +
+      burgerExtraPrice;
 
     const finalItem = {
       ...item,
-      quantity: 1, 
+      quantity: 1,
       selectedDrinkType: selectedType[item.id],
       selectedSyrup: syrupChoice,
       extraChicken: extraChicken[item.id] || false,
-      spicy: spicyOption[item.id] || false, 
-      extraBurgerChicken:
-        extraBurgerChicken[item.id] || false,
-      finalPrice: item.price + syrupPrice + spicyPrice + burgerExtraPrice ,
+      spicy: spicyOption[item.id] || false,
+      mozzarella: mozzarellaOption[item.id] || false,
+      curry: curryOption[item.id] || false,
+      extraBurgerChicken: extraBurgerChicken[item.id] || false,
+      finalPrice,
     };
 
     setCart([...cart, finalItem]);
   };
+
   const increaseQty = (index: number) => {
+    const updatedCart = [...cart];
+    updatedCart[index].quantity += 1;
+    setCart(updatedCart);
+  };
 
-  const updatedCart = [...cart];
+  const decreaseQty = (index: number) => {
+    const updatedCart = [...cart];
 
-  updatedCart[index].quantity += 1;
+    if (updatedCart[index].quantity > 1) {
+      updatedCart[index].quantity -= 1;
+    } else {
+      updatedCart.splice(index, 1);
+    }
 
-  setCart(updatedCart);
-};
-
-const decreaseQty = (index: number) => {
-
-  const updatedCart = [...cart];
-
-  if (updatedCart[index].quantity > 1) {
-    updatedCart[index].quantity -= 1;
-  } else {
-    updatedCart.splice(index, 1);
-  }
-
-  setCart(updatedCart);
-};
+    setCart(updatedCart);
+  };
 
   const total = cart.reduce(
     (sum: number, item: any) =>
       sum + (item.finalPrice || 0) * (item.quantity || 1),
-    
     0
   );
 
@@ -207,9 +191,8 @@ const decreaseQty = (index: number) => {
   }
 
   return (
-     <main className="bg-black text-white min-h-screen" >
+    <main className="bg-black text-white min-h-screen">
 
-      {/* HERO */}
       <section className="bg-[#f5ede3]">
         <img
           src="/hero-banner.jpeg"
@@ -218,7 +201,6 @@ const decreaseQty = (index: number) => {
         />
       </section>
 
-      {/* TOP BAR */}
       <div className="sticky top-0 z-50 bg-black border-b border-[#c8a96b]">
 
         <div className="flex items-center gap-4 px-5 py-4">
@@ -236,495 +218,8 @@ const decreaseQty = (index: number) => {
 
         </div>
 
-        {menuOpen && (
-
-  <div className="border-t border-[#222] bg-black">
-
-    <div className="flex flex-col">
-
-      <button
-        onClick={() => {
-          setActiveCategory("Home");
-          setMenuOpen(false);
-        }}
-        className="px-5 py-4 text-left text-[#c8a96b] font-black border-b border-[#222]"
-      >
-        HOME
-      </button>
-
-      {categories.map((category) => (
-
-        <button
-          key={category}
-          onClick={() => {
-            setActiveCategory(category);
-            setMenuOpen(false);
-          }}
-          className="px-5 py-4 text-left text-[#c8a96b] font-black uppercase border-b border-[#222]"
-        >
-          {category}
-        </button>
-
-      ))}
-
-    </div>
-
-  </div>
-
-)}
-           
       </div>
 
-      {/* MENU */}
-      <section className="p-6 bg-[#050505]">
-
-        {(activeCategory === "Home"
-          ? categories
-          : [activeCategory]
-        ).map((category) => (
-
-          <div
-            key={category}
-            className="mb-16"
-          >
-
-            <h2 className="text-4xl font-black uppercase mb-8 text-[#c8a96b]">
-              {category}
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {menuItems
-                .filter((item) => {
-  if (category === "Western") {
-    return ["Burgers", "Burger Roll", "Omelette", "Rotty Wrap", "Snacks"].includes(item.category);
-  }
-
-  if (category === "Local Food / Fusion") {
-    return ["Signature Rotty (4 PCS)", "Fried Rice & Noodles"].includes(item.category);
-  }
-
-  if (category === "Coffee") {
-    return item.category === "Coffee";
-  }
-
-  if (category === "Non-Coffee") {
-    return item.category === "Non-Coffee";
-  }
-
-  return item.category === category;
-})
-                .map((item) => (
-
-                  <div
-                    key={item.id}
-                    className="bg-[#111] border border-[#222] rounded-3xl p-6"
-                  >
-
-                    <h3 className="text-2xl font-black uppercase">
-                      {item.name}
-                    </h3>
-
-                    {item.type && (
-
-                      <div className="flex gap-2 mt-4">
-
-                        {item.type.map((drinkType: string) => (
-
-                          <button
-                            key={drinkType}
-                            onClick={() =>
-                              setSelectedType({
-                                ...selectedType,
-                                [item.id]: drinkType,
-                              })
-                            }
-                            className={`px-3 py-1 rounded-full text-sm font-bold ${
-                              selectedType[item.id] === drinkType
-                                ? "bg-[#c8a96b] text-black"
-                                : "bg-[#222]"
-                            }`}
-                          >
-                            {drinkType}
-                          </button>
-
-                        ))}
-
-                      </div>
-
-                    )}
-
-              {Boolean((item as any).syrup) && ( 
-                      <div className="mt-5">
-
-                        <p className="text-gray-400 text-sm mb-3">
-                          ADD SYRUP (+RM3)
-                        </p>
-
-                        <div className="flex flex-wrap gap-2"> 
-
-                          {syrups.map((syrup) => (
-
-                            <button
-                              key={syrup}
-                              onClick={() =>
-                                setSelectedSyrup({
-                                  ...selectedSyrup,
-                                  [item.id]: syrup,
-                                })
-                              }
-                              className={`px-3 py-1 rounded-full text-sm font-bold ${
-                                selectedSyrup[item.id] === syrup
-                                  ? "bg-[#c8a96b] text-black"
-                                  : "bg-[#222]"
-                              }`}
-                            >
-                              {syrup}
-                            </button>
-
-                          ))}
-
-                        </div>
-
-                      </div>
-
-                    )}
-
-                    <p className="text-[#c8a96b] text-3xl font-black mt-6">
-                      RM{item.price}
-                    </p>
-
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-                    >
-                      Add To Cart
-                    </button>
-
-                  </div>
-
-                ))}
-
-            </div>
-
-          </div>
-
-        ))}
-
-      </section>
-
-      {/* FLOATING CART */}
-      <button
-        onClick={() => setCartOpen(true)}
-        className="fixed bottom-6 right-6 bg-[#c8a96b] text-black w-16 h-16 rounded-full text-2xl z-50 flex items-center justify-center"
-      >
-        🛒
-        {cart.length > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
-            {cart.length}
-          </span>
-        )}
-      </button>
-
-      {/* CART */}
-      {cartOpen && (
-
-        <div className="fixed inset-0 bg-black/70 z-[9999] flex justify-end">
-
-          <div className="w-full max-w-md bg-[#111] h-screen overflow-y-auto p-6">
-
-            <div className="flex justify-between items-center mb-8">
-
-              <h2 className="text-4xl font-black">
-                CART
-              </h2>
-
-              <button
-                onClick={() => setCartOpen(false)}
-                className="text-3xl"
-              >
-                ✕
-              </button>
-
-            </div>
-
-            <div className="space-y-4">
-
-              {cart.map((item: any, index: number) => ( 
-
-                <div
-                  key={index}
-                  className="bg-[#1a1a1a] p-5 rounded-3xl"
-                >
-
-                  <h3 className="font-black uppercase">
-                    {item.name}
-                  </h3>
-                  {item.category === "Fried Rice & Noodles" && (
-  <div className="mt-4 space-y-3">
-
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={extraChicken[item.id] || false}
-        onChange={(e) =>
-          setExtraChicken({
-            ...extraChicken,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-      Extra Chicken
-    </label>
-
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={spicyOption[item.id] || false}
-        onChange={(e) =>
-          setSpicyOption({
-            ...spicyOption,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-      Spicy (+RM1)
-    </label>
-
-    {["Burgers", "Burger Roll", "Omelette", "Rotty Wrap", "Snacks"].includes(item.category) && (
-  <div className="mt-4 space-y-3">
-
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={mozzarellaOption[item.id] || false}
-        onChange={(e) =>
-          setMozzarellaOption({
-            ...mozzarellaOption,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-      Mozzarella Cheese (+RM3)
-    </label>
-
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={curryOption[item.id] || false}
-        onChange={(e) =>
-          setCurryOption({
-            ...curryOption,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-      Curry (+RM5)
-    </label>
-
-    {item.name.toLowerCase().includes("burger") && (
-  <div className="mt-3">
-    <label className="flex items-center gap-3 text-sm">
-      <input
-        type="checkbox"
-        checked={extraBurgerChicken[item.id] || false}
-        onChange={(e) =>
-          setExtraBurgerChicken({
-            ...extraBurgerChicken,
-            [item.id]: e.target.checked,
-          })
-        }
-      />
-
-      Extra Crispy Chicken (+RM6)
-    </label>
-  </div>
-    )}
-
-  </div>
-    )} 
-
-  </div>
-}   
-
-                  {item.selectedDrinkType && (
-                    <p className="text-sm text-gray-400 mt-1">
-                      {item.selectedDrinkType}
-                    </p>
-                  )}
-
-                  {item.selectedSyrup !== "No Syrup" && (
-                    <p className="text-sm text-[#c8a96b] mt-1">
-                      {item.selectedSyrup} Syrup
-                    </p>
-                  )}
-
-                <div className="flex items-center justify-between mt-4">
-
-  <div className="flex items-center gap-3">
-
-    <button
-      onClick={() => decreaseQty(index)}
-      className="bg-[#222] w-8 h-8 rounded-full"
-    >
-      -
-    </button>
-
-    <span className="font-bold">
-      {item.quantity}
-    </span>
-
-    <button
-      onClick={() => increaseQty(index)}
-      className="bg-[#c8a96b] text-black w-8 h-8 rounded-full"
-    >
-      +
-    </button>
-
-  </div>
-
-  <p className="text-[#c8a96b] font-bold">
-    RM{(item.finalPrice || 0) * (item.quantity || 1)}
-  </p>
-
-</div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-            <div className="mt-8 space-y-4">
-
-              <input
-                type="text"
-                placeholder="Customer Name"
-                value={customerName}
-                onChange={(e) =>
-                  setCustomerName(e.target.value)
-                }
-                className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-              />
-
-              <input
-                type="text"
-                placeholder="Phone Number"
-                value={customerPhone}
-                onChange={(e) =>
-                  setCustomerPhone(e.target.value)
-                }
-                className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-              />
-              <div className="space-y-4 mt-4">
-
-  <select
-    value={orderType}
-    onChange={(e) => setOrderType(e.target.value)}
-    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-  >
-    <option value="Pickup">Pickup</option>
-    <option value="Delivery">Delivery</option>
-  </select>
-
-  {orderType === "Delivery" && (
-    <input
-      type="text"
-      placeholder="Block / Room Number"
-      value={deliveryAddress}
-      onChange={(e) => setDeliveryAddress(e.target.value)}
-      className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-    />
-  )}
-
-  <select
-    value={paymentMethod}
-    onChange={(e) => setPaymentMethod(e.target.value)}
-    className="w-full bg-[#1a1a1a] rounded-2xl px-5 py-4 outline-none"
-  >
-    <option value="Cash">Cash</option>
-    <option value="Card">Card</option>
-  </select>
-
-</div>
-  
-            <div className="mt-10 border-t border-[#222] pt-8">
-
-              <h3 className="text-3xl font-black">
-                TOTAL: RM{total}
-              </h3>
-
-              <button
-                onClick={() => {
-                  if (!customerName || !customerPhone) {
-                    if (orderType === "Delivery" && total < 30) {
-  alert("Delivery only available for orders RM30 and above");
-  return;
-}
-  alert("Please enter your name and phone number");
-  return;
-}
-
-const orderNumber = Math.floor(1000 + Math.random() * 9000);
-                  let message = `NEW ORDER - MAMASAN SCORPION\n\nORDER #${orderNumber}\n\n`;
-
-                  cart.forEach((item: any) => {
-  message += `${item.name}`;
-  if (item.extraChicken) {
-  message += `\n🍗 Extra Chicken`;
-}
-
-if (item.spicy) {
-  message += `\n🌶 Spicy`;
-}
-
-if (item.extraBurgerChicken) {
-  message += '\n🍔 Extra Crispy Chicken';
-}
-
-  if (item.selectedDrinkType) {
-    message += ` (${item.selectedDrinkType})`;
-  }
-
-  if (item.selectedSyrup && item.selectedSyrup !== "No Syrup") {
-    message += ` - ${item.selectedSyrup} Syrup`;
-  }
-
-  message += ` x${item.quantity} - RM${item.finalPrice}\n`;
-});
-
-                  message += `\nTOTAL: RM${total}`;
-
-                  message += `\n\nNAME: ${customerName}`;
-
-                  message += `\nPHONE: ${customerPhone}`;
-
-                  message += `\nORDER TYPE: ${orderType}`;
-
-                  message += `\nPAYMENT: ${paymentMethod}`;
-
-if (orderType === "Delivery") {
-  message += `\nDELIVERY LOCATION: ${deliveryAddress}`;
-}
-
-                  window.open(
-                    `https://wa.me/60124478224?text=${encodeURIComponent(message)}`,
-                    "_blank"
-                  );
-
-                  }}
-                className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
-              >
-                Checkout
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-        </div>
-</main>
+    </main>
   );
-            
 }

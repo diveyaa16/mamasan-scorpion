@@ -57,9 +57,9 @@ const menuItems = [
   { id: 30, category: "Protein Shakes", name: "Mocha Protein", price: 25 },
   { id: 31, category: "Protein Shakes", name: "Vanilla Biscoff Protein", price: 25 },
 
-  { id: 32, category: "Fresh Juices", name: "Orange Juice", price: 10 },
-  { id: 33, category: "Fresh Juices", name: "Apple Juice", price: 10 },
-  { id: 34, category: "Fresh Juices", name: "Watermelon Juice", price: 10 },
+  { id: 32, category: "Fresh Juices", name: "Orange Juice", price: 15 },
+  { id: 33, category: "Fresh Juices", name: "Apple Juice", price: 15 },
+  { id: 34, category: "Fresh Juices", name: "Watermelon Juice", price: 15 },
 
   { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"] },
   { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true },
@@ -89,6 +89,8 @@ export default function Home() {
   const [curryOption, setCurryOption] = useState<any>({});
   const [extraBurgerChicken, setExtraBurgerChicken] = useState<any>({});
   const [extraProtein, setExtraProtein] = useState<any>({});
+  const [extraShotCoffee, setExtraShotCoffee] = useState<any>({});
+  const [extraSyrupShot, setExtraSyrupShot] = useState<any>({});
 
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -123,12 +125,14 @@ export default function Home() {
     const syrupChoice = selectedSyrup[item.id] || "No Syrup";
 
     const syrupPrice = syrupChoice !== "No Syrup" ? 3 : 0;
-    const spicyPrice = spicyOption[item.id] ? 1 : 0;
+    const spicyPrice = spicyOption[item.id] ? 0 : 0;
     const extraChickenPrice = extraChicken[item.id] ? 5 : 0;
-    const mozzarellaPrice = mozzarellaOption[item.id] ? 5 : 0;
+    const mozzarellaPrice = mozzarellaOption[item.id] ? 3 : 0;
     const curryPrice = curryOption[item.id] ? 5 : 0;
     const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
     const extraProteinPrice = extraProtein[item.id] ? 5 : 0;
+    const extraShotCoffeePrice = extraShotCoffee[item.id] ? 2 : 0;
+    const extraSyrupShotPrice = extraSyrupShot[item.id] ? 2 : 0;
 
     const finalPrice =
       item.price +
@@ -138,6 +142,8 @@ export default function Home() {
       mozzarellaPrice +
       curryPrice +
       extraProteinPrice + 
+      extraShotCoffeePrice +
+      extraSyrupShotPrice + 
       burgerExtraPrice;
 
     const finalItem = {
@@ -151,6 +157,8 @@ export default function Home() {
       curry: curryOption[item.id] || false,
       extraBurgerChicken: extraBurgerChicken[item.id] || false,
       extraProtein: extraProtein[item.id] || false,
+      extraShotCoffee: extraShotCoffee[item.id] || false,
+      extraSyrupShot: extraSyrupShot[item.id] || false,
       finalPrice,
     };
 
@@ -361,8 +369,22 @@ setTimeout(() => {
           })
         }
       />
-      Mozzarella Cheese (+RM5)
+      Mozzarella Cheese (+RM3)
     </label>
+
+    <label className="flex items-center gap-3 text-sm">
+  <input
+    type="checkbox"
+    checked={curryOption[item.id] || false}
+    onChange={(e) =>
+      setCurryOption({
+        ...curryOption,
+        [item.id]: e.target.checked,
+      })
+    }
+  />
+  Curry Sauce (+RM5)
+</label>
 
   </div>
 )}
@@ -397,7 +419,7 @@ setTimeout(() => {
           })
         }
       />
-      Spicy (+RM1)
+      Spicy (+RM0)
     </label>
 
   </div>
@@ -491,6 +513,38 @@ setTimeout(() => {
 
                   )}
 
+                  <div className="mt-4 space-y-3">
+
+  <label className="flex items-center gap-3 text-sm">
+    <input
+      type="checkbox"
+      checked={extraShotCoffee[item.id] || false}
+      onChange={(e) =>
+        setExtraShotCoffee({
+          ...extraShotCoffee,
+          [item.id]: e.target.checked,
+        })
+      }
+    />
+    Extra Shot Coffee (+RM2)
+  </label>
+
+  <label className="flex items-center gap-3 text-sm">
+    <input
+      type="checkbox"
+      checked={extraSyrupShot[item.id] || false}
+      onChange={(e) =>
+        setExtraSyrupShot({
+          ...extraSyrupShot,
+          [item.id]: e.target.checked,
+        })
+      }
+    />
+    Extra Syrup Shot (+RM2)
+  </label>
+
+</div>
+
                   <p className="text-[#c8a96b] text-3xl font-black mt-6">
                     RM{item.price}
                   </p>
@@ -571,6 +625,18 @@ setTimeout(() => {
                 {item.extraProtein && (
   <p className="text-sm text-gray-400">
     + Extra Protein
+  </p>
+)}
+
+{item.extraShotCoffee && (
+  <p className="text-sm text-gray-400">
+    + Extra Shot Coffee
+  </p>
+)}
+
+{item.extraSyrupShot && (
+  <p className="text-sm text-gray-400">
+    + Extra Syrup Shot
   </p>
 )}
 
@@ -712,6 +778,11 @@ setTimeout(() => {
              <button
   onClick={() => {
 
+    if (orderType === "Delivery" && total < 30) {
+  alert("Delivery minimum order is RM30");
+  return;
+}
+
     const orderNumber = Math.floor(Math.random() * 9000) + 1000;
     let message =
   `NEW ORDER - MAMASAN SCORPION\n` +
@@ -723,6 +794,14 @@ setTimeout(() => {
       if (item.extraProtein) {
         message += " + Extra Protein\n";
       }
+
+      if (item.extraShotCoffee) {
+  message += " + Extra Shot Coffee\n";
+}
+
+if (item.extraSyrupShot) {
+  message += " + Extra Syrup Shot\n";
+}
 
       if (item.extraBurgerChicken) {
         message += " + Extra Crispy Chicken\n";

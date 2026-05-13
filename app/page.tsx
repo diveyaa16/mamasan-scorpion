@@ -77,7 +77,9 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("Home");
   const [cartOpen, setCartOpen] = useState(false);
 
+
   const [cart, setCart] = useState<any[]>([]);
+  const [addedItem, setAddedItem] = useState<number | null>(null);
 
   const [selectedType, setSelectedType] = useState<any>({});
   const [selectedSyrup, setSelectedSyrup] = useState<any>({});
@@ -122,6 +124,7 @@ export default function Home() {
 
     const syrupPrice = syrupChoice !== "No Syrup" ? 3 : 0;
     const spicyPrice = spicyOption[item.id] ? 1 : 0;
+    const extraChickenPrice = extraChicken[item.id] ? 5 : 0;
     const mozzarellaPrice = mozzarellaOption[item.id] ? 5 : 0;
     const curryPrice = curryOption[item.id] ? 5 : 0;
     const burgerExtraPrice = extraBurgerChicken[item.id] ? 6 : 0;
@@ -131,6 +134,7 @@ export default function Home() {
       item.price +
       syrupPrice +
       spicyPrice +
+      extraChickenPrice + 
       mozzarellaPrice +
       curryPrice +
       extraProteinPrice + 
@@ -151,6 +155,11 @@ export default function Home() {
     };
 
     setCart([...cart, finalItem]);
+    setAddedItem(item.id);
+
+setTimeout(() => {
+  setAddedItem(null);
+}, 1000);
   };
 
   const increaseQty = (index: number) => {
@@ -488,9 +497,13 @@ export default function Home() {
 
                   <button
                     onClick={() => addToCart(item)}
-                    className="mt-6 w-full bg-[#c8a96b] text-black py-4 rounded-full font-black uppercase"
+                    className={`mt-6 w-full py-4 rounded-2xl font-black transition-all ${
+  addedItem === item.id
+    ? "bg-green-500 text-white"
+    : "bg-[#c8a96b] text-black"
+}`}
                   >
-                    Add To Cart
+                    {addedItem === item.id ? "Added ✓" : "Add To Cart"}
                   </button>
 
                 </div>
@@ -570,6 +583,18 @@ export default function Home() {
 {item.mozzarella && (
   <p className="text-sm text-gray-400">
     + Mozzarella Cheese
+  </p>
+)}
+
+{item.extraChicken && (
+  <p className="text-sm text-gray-400">
+    + Extra Chicken
+  </p>
+)}
+
+{item.spicy && (
+  <p className="text-sm text-gray-400">
+    + Spicy
   </p>
 )}
 
@@ -687,7 +712,10 @@ export default function Home() {
              <button
   onClick={() => {
 
-    let message = "NEW ORDER - MAMASAN SCORPION\n\n";
+    const orderNumber = Math.floor(Math.random() * 9000) + 1000;
+    let message =
+  `NEW ORDER - MAMASAN SCORPION\n` +
+  `ORDER #: ${orderNumber}\n\n`;
 
     cart.forEach((item: any) => {
       message += `${item.name} - RM${item.finalPrice}\n`;
@@ -703,6 +731,14 @@ export default function Home() {
       if (item.mozzarella) {
         message += " + Mozzarella Cheese\n";
       }
+
+      if (item.extraChicken) {
+  message += " + Extra Chicken\n";
+}
+
+if (item.spicy) {
+  message += " + Spicy\n";
+}
 
       if (item.selectedDrinkType) {
         message += ` + ${item.selectedDrinkType}\n`;

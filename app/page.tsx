@@ -68,7 +68,6 @@ const menuItems = [
   { id: 39, category: "Non-Coffee", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"] },
   { id: 40, category: "Coffee", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true },
   { id: 41, category: "Coffee", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true },
-  { id: 42, category: "Coffee", name: "Extra Shot Coffee", price: 14, type: ["Hot", "Iced"], syrup: true },
 ];
 
 export default function Home() {
@@ -419,7 +418,7 @@ setTimeout(() => {
           })
         }
       />
-      Spicy (+RM0)
+      Spicy 
     </label>
 
   </div>
@@ -476,44 +475,14 @@ setTimeout(() => {
                   )}
 
                   {/* SYRUPS */}
-                  {item.syrup && (
+                  {item.category === "Coffee" && (
 
                     <div className="mt-5">
 
                       <p className="text-gray-400 text-sm mb-3">
                         ADD SYRUP (+RM3)
                       </p>
-
-                      <div className="flex flex-wrap gap-2">
-
-                        {syrups.map((syrup) => (
-
-                          <button
-                            key={syrup}
-                            onClick={() =>
-                              setSelectedSyrup({
-                                ...selectedSyrup,
-                                [item.id]: syrup,
-                              })
-                            }
-                            className={`px-3 py-1 rounded-full text-sm font-bold ${
-                              selectedSyrup[item.id] === syrup
-                                ? "bg-[#c8a96b] text-black"
-                                : "bg-[#222]"
-                            }`}
-                          >
-                            {syrup}
-                          </button>
-
-                        ))}
-
-                      </div>
-
-                    </div>
-
-                  )}
-
-                  <div className="mt-4 space-y-3">
+<div className="mt-4 space-y-3">
 
   <label className="flex items-center gap-3 text-sm">
     <input
@@ -544,6 +513,36 @@ setTimeout(() => {
   </label>
 
 </div>
+                      <div className="flex flex-wrap gap-2">
+
+                        {syrups.map((syrup) => (
+
+                          <button
+                            key={syrup}
+                            onClick={() =>
+                              setSelectedSyrup({
+                                ...selectedSyrup,
+                                [item.id]: syrup,
+                              })
+                            }
+                            className={`px-3 py-1 rounded-full text-sm font-bold ${
+                              selectedSyrup[item.id] === syrup
+                                ? "bg-[#c8a96b] text-black"
+                                : "bg-[#222]"
+                            }`}
+                          >
+                            {syrup}
+                          </button>
+
+                        ))}
+
+                      </div>
+
+                    </div>
+
+                  )}
+
+                
 
                   <p className="text-[#c8a96b] text-3xl font-black mt-6">
                     RM{item.price}

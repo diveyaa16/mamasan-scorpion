@@ -651,6 +651,12 @@ setTimeout(() => {
   </p>
 )}
 
+{item.curry && (
+  <p className="text-sm text-gray-400">
+    + Curry
+  </p>
+)}
+
 {item.extraChicken && (
   <p className="text-sm text-gray-400">
     + Extra Chicken
@@ -809,6 +815,10 @@ if (item.extraSyrupShot) {
       if (item.mozzarella) {
         message += " + Mozzarella Cheese\n";
       }
+
+      if (item.curry) {
+  message += "+ Curry\n";
+}
 
       if (item.extraChicken) {
   message += " + Extra Chicken\n";

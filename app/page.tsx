@@ -783,6 +783,11 @@ setTimeout(() => {
              <button
   onClick={() => {
 
+    if (!customerName || !customerPhone) {
+  alert("Please fill in your name and phone number");
+  return;
+}
+
     if (orderType === "Delivery" && total < 30) {
   alert("Delivery minimum order is RM30");
   return;

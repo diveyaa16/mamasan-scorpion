@@ -544,10 +544,6 @@ setTimeout(() => {
 
                 
 
-                  <p className="text-[#c8a96b] text-3xl font-black mt-6">
-                    RM{item.price}
-                  </p>
-
                   <button
                     onClick={() => addToCart(item)}
                     className={`mt-6 w-full py-4 rounded-2xl font-black transition-all ${
@@ -788,10 +784,42 @@ setTimeout(() => {
   return;
 }
 
-    if (orderType === "Delivery" && total < 30) {
-  alert("Delivery minimum order is RM30");
+   const foodCategories = [
+  "Burgers",
+  "Burger Roll",
+  "Omelette",
+  "Rotty Wrap",
+  "Signature Rotty (4 PCS)",
+  "Fried Rice & Noodles",
+  "Snacks",
+];
+
+const drinkCategories = [
+  "Milkshakes",
+  "Protein Shakes",
+  "Fresh Juices",
+  "Coffee",
+  "Non-Coffee",
+];
+
+const foodCount = cart.filter((item: any) =>
+  foodCategories.includes(item.category)
+).length;
+
+const drinkCount = cart.filter((item: any) =>
+  drinkCategories.includes(item.category)
+).length;
+
+const validDelivery =
+  (foodCount >= 1 && drinkCount >= 1) ||
+  drinkCount >= 3;
+
+if (orderType === "Delivery" && !validDelivery) {
+  alert(
+    "Delivery minimum is:\n• 1 Food + 1 Drink\nOR\n• 3 Drinks"
+  );
   return;
-}
+} 
 
     const orderNumber = Math.floor(Math.random() * 9000) + 1000;
     let message =

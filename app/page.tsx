@@ -348,7 +348,7 @@ setTimeout(() => {
           })
         }
       />
-      Extra Protein (+RM5)
+      Extra Protein 
     </label>
 
   </div>
@@ -368,7 +368,7 @@ setTimeout(() => {
           })
         }
       />
-      Mozzarella Cheese (+RM3)
+      Mozzarella Cheese
     </label>
 
     <label className="flex items-center gap-3 text-sm">
@@ -382,7 +382,7 @@ setTimeout(() => {
       })
     }
   />
-  Curry Sauce (+RM5)
+  Curry Sauce
 </label>
 
   </div>
@@ -403,7 +403,7 @@ setTimeout(() => {
         })
       }
     />
-    Extra Chicken (+RM5)
+    Extra Chicken 
   </label>
 )}
 
@@ -438,7 +438,7 @@ setTimeout(() => {
           })
         }
       />
-      Extra Crispy Chicken (+RM6)
+      Extra Crispy Chicken 
     </label>
 
   </div>
@@ -480,7 +480,7 @@ setTimeout(() => {
                     <div className="mt-5">
 
                       <p className="text-gray-400 text-sm mb-3">
-                        ADD SYRUP (+RM3)
+                        ADD SYRUP 
                       </p>
 <div className="mt-4 space-y-3">
 
@@ -495,7 +495,7 @@ setTimeout(() => {
         })
       }
     />
-    Extra Shot Coffee (+RM2)
+    Extra Shot Coffee 
   </label>
 
   <label className="flex items-center gap-3 text-sm">
@@ -509,7 +509,7 @@ setTimeout(() => {
         })
       }
     />
-    Extra Syrup Shot (+RM2)
+    Extra Syrup Shot 
   </label>
 
 </div>
@@ -701,9 +701,6 @@ setTimeout(() => {
 
                   </div>
 
-                  <p className="text-[#c8a96b] font-bold">
-                    RM{(item.finalPrice || 0) * (item.quantity || 1)}
-                  </p>
 
                 </div>
 
@@ -772,9 +769,9 @@ setTimeout(() => {
 
             <div className="mt-10 border-t border-[#222] pt-8">
 
-              <h3 className="text-3xl font-black">
-                TOTAL: RM{total}
-              </h3>
+              <h3 className="text-2xl font-black text-[#c8a96b]">
+  Review Your Order
+</h3>
 
              <button
   onClick={() => {

@@ -103,25 +103,28 @@ export default function Home() {
     }, 1200);
   }, []);
 
-  useEffect(() => {
+ useEffect(() => {
   let timeout: NodeJS.Timeout;
 
   const resetTimer = () => {
     clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      alert("Session expired. Please scan QR again.");
 
+      // Clear cart
       setCart([]);
 
-      window.location.reload();
-    }, 15 * 60 * 1000); // 15 minutes
+      // Redirect away from website
+      window.location.href = "about:blank";
+
+    }, 300000); // 5 minutes
   };
 
+  // Detect activity
   window.addEventListener("mousemove", resetTimer);
   window.addEventListener("click", resetTimer);
-  window.addEventListener("keypress", resetTimer);
   window.addEventListener("scroll", resetTimer);
+  window.addEventListener("touchstart", resetTimer);
 
   resetTimer();
 
@@ -130,8 +133,8 @@ export default function Home() {
 
     window.removeEventListener("mousemove", resetTimer);
     window.removeEventListener("click", resetTimer);
-    window.removeEventListener("keypress", resetTimer);
     window.removeEventListener("scroll", resetTimer);
+    window.removeEventListener("touchstart", resetTimer);
   };
 }, []);
 

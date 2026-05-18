@@ -103,6 +103,38 @@ export default function Home() {
     }, 1200);
   }, []);
 
+  useEffect(() => {
+  let timeout: NodeJS.Timeout;
+
+  const resetTimer = () => {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      alert("Session expired. Please scan QR again.");
+
+      setCart([]);
+
+      window.location.reload();
+    }, 15 * 60 * 1000); // 15 minutes
+  };
+
+  window.addEventListener("mousemove", resetTimer);
+  window.addEventListener("click", resetTimer);
+  window.addEventListener("keypress", resetTimer);
+  window.addEventListener("scroll", resetTimer);
+
+  resetTimer();
+
+  return () => {
+    clearTimeout(timeout);
+
+    window.removeEventListener("mousemove", resetTimer);
+    window.removeEventListener("click", resetTimer);
+    window.removeEventListener("keypress", resetTimer);
+    window.removeEventListener("scroll", resetTimer);
+  };
+}, []);
+
   const categories = [
     "Home",
     "Western",

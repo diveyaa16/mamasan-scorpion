@@ -925,7 +925,7 @@ if (item.spicy) {
       encodeURIComponent(message);
 
     window.open(
-      `https://wa.me/60124478224?text=${whatsappMessage}`,
+      `https://wa.me/60124073424?text=${whatsappMessage}`,
       "_blank"
     );
   }}

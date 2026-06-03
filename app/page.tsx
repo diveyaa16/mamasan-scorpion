@@ -11,9 +11,9 @@ const syrups = [
 ];
 
 const menuItems = [
-  { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25 },
+  { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 20 },
 
-  { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20 },
+  { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20, image: "/double bacon egg.jpeg" },
   { id: 44, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
   { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
   { id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
@@ -364,6 +364,13 @@ setTimeout(() => {
                   key={item.id}
                   className="bg-[#111] border border-[#222] rounded-3xl p-6"
                 >
+                  {item.image && (
+  <img
+    src={item.image}
+    alt={item.name}
+    className="w-full aspect-square object-cover rounded-2xl mb-4"
+  />
+)}
 
                   <h3 className="text-2xl font-black uppercase">
                     {item.name}

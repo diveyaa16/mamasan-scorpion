@@ -368,6 +368,16 @@ setTimeout(() => {
                   <h3 className="text-2xl font-black uppercase">
                     {item.name}
                   </h3>
+                  {(
+  item.category === "Burgers" ||
+  item.category === "Fried Rice & Noodles" ||
+  item.category === "Snacks" ||
+  item.name === "Chicken Wrap"
+) && (
+  <p className="text-[#c8a96b] text-sm mt-2">
+    Available from 11:00 AM onwards
+  </p>
+)}
 
                   {item.category === "Protein Shakes" && (
   <div className="mt-4 space-y-3">

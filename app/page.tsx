@@ -11,7 +11,7 @@ const syrups = [
 ];
 
 const menuItems = [
-  { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 20, image: "/chicken-burger.jpeg" },
+  { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 25, image: "/chicken-burger.jpeg" },
 
   { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20, image: "/double bacon egg.jpeg" },
   { id: 44, category: "Burger Roll", name: "Double Bacon Cheese", price: 20, image: "/bacon cheese.jpeg" },

@@ -15,8 +15,8 @@ const menuItems = [
 
   { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20, image: "/double bacon egg.jpeg" },
   { id: 44, category: "Burger Roll", name: "Double Bacon Cheese", price: 20, image: "/bacon cheese.jpeg" },
-  { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20, image: "/ham-cheese" },
-  { id: 46, category: "Burger Roll", name: "Double Ham Egg Cheese", price: 20, image: "/ham-egg" },
+  { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20, image: "/ham-cheese.jpeg" },
+  { id: 46, category: "Burger Roll", name: "Double Ham Egg Cheese", price: 20, image: "/ham-egg.jpeg" },
 
   { id: 47, category: "Omelette", name: "Chicken Omelette", price: 15, image: "/chicken.jpeg" },
   { id: 48, category: "Omelette", name: "Bacon Omelette", price: 15, image: "/bacon.jpeg" },
@@ -65,7 +65,7 @@ const menuItems = [
   { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"], image: "/milo.jpeg" },
   { id: 36, category: "Coffee", name: "Cappuccino", price: 12, type: ["Hot", "Iced"], syrup: true, image: "/cappu.jpeg" },
   { id: 37, category: "Coffee", name: "Americano", price: 12, type: ["Hot", "Iced"], syrup: true, image: "/americano.jpeg" },
-  { id: 38, category: "Non-Coffee", name: "Chocolate", price: 12, type: ["Hot", "Iced"], image: "/choco.jpeg" },
+  { id: 38, category: "Non-Coffee", name: "Chocolate", price: 12, type: ["Hot", "Iced"], image: "/chocolate.jpeg" },
   { id: 39, category: "Non-Coffee", name: "Thai Milk Tea", price: 12, type: ["Hot", "Iced"], image: "/thai.jpeg" },
   { id: 40, category: "Coffee", name: "Latte", price: 12, type: ["Hot", "Iced"], syrup: true, image: "/latte.jpeg" },
   { id: 41, category: "Coffee", name: "Mocha", price: 12, type: ["Hot", "Iced"], syrup: true, image: "/mocha.jpeg" },

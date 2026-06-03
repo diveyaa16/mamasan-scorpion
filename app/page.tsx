@@ -14,9 +14,9 @@ const menuItems = [
   { id: 1, category: "Burgers", name: "Crispy Chicken Burger & Chips", price: 20 },
 
   { id: 43, category: "Burger Roll", name: "Double Bacon Egg Cheese", price: 20, image: "/double bacon egg.jpeg" },
-  { id: 44, category: "Burger Roll", name: "Double Bacon Cheese Onion", price: 20 },
+  { id: 44, category: "Burger Roll", name: "Double Bacon Cheese", price: 20, image: "/bacon cheese.jpeg" },
   { id: 45, category: "Burger Roll", name: "Double Ham Cheese", price: 20 },
-  { id: 46, category: "Burger Roll", name: "Double Ham Cheese Onion", price: 20 },
+  { id: 46, category: "Burger Roll", name: "Double Ham Egg Cheese", price: 20 },
 
   { id: 47, category: "Omelette", name: "Chicken Omelette", price: 15 },
   { id: 48, category: "Omelette", name: "Bacon Omelette", price: 15 },
@@ -27,7 +27,7 @@ const menuItems = [
   { id: 2, category: "Rotty Wrap", name: "Chicken Wrap", price: 23 },
   { id: 3, category: "Rotty Wrap", name: "Bacon Wrap", price: 23 },
 
-  { id: 4, category: "Signature Rotty (4 PCS)", name: "Crispy Rotty With Curry Dip", price: 12 },
+  { id: 4, category: "Signature Rotty (4 PCS)", name: "Rotty With Curry Dip", price: 12 },
   { id: 5, category: "Signature Rotty (4 PCS)", name: "Chocolate Rotty", price: 12 },
 
   { id: 6, category: "Fried Rice & Noodles", name: "Chicken Rice", price: 12 },
@@ -58,7 +58,6 @@ const menuItems = [
   { id: 31, category: "Protein Shakes", name: "Vanilla Biscoff Protein", price: 25 },
 
   { id: 32, category: "Fresh Juices", name: "Orange Juice", price: 15 },
-  { id: 33, category: "Fresh Juices", name: "Apple Juice", price: 15 },
   { id: 34, category: "Fresh Juices", name: "Watermelon Juice", price: 15 },
 
   { id: 35, category: "Non-Coffee", name: "Milo", price: 12, type: ["Hot", "Iced"] },
@@ -334,7 +333,7 @@ setTimeout(() => {
             {category}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
             {menuItems
               .filter((item) => {
@@ -372,7 +371,7 @@ setTimeout(() => {
   />
 )}
 
-                  <h3 className="text-2xl font-black uppercase">
+                  <h3 className="text-lg font-black uppercase">
                     {item.name}
                   </h3>
                   {(
@@ -598,7 +597,7 @@ setTimeout(() => {
 
                   <button
                     onClick={() => addToCart(item)}
-                    className={`mt-6 w-full py-4 rounded-2xl font-black transition-all ${
+                    className={`mt-4 w-full py-3 rounded-2xl font-black transition-all ${
   addedItem === item.id
     ? "bg-green-500 text-white"
     : "bg-[#c8a96b] text-black"

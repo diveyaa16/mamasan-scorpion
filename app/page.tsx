@@ -869,7 +869,7 @@ if (orderType === "Delivery" && !validDelivery) {
   `ORDER #: ${orderNumber}\n\n`;
 
     cart.forEach((item: any) => {
-      message += `${item.name} - RM${item.finalPrice}\n`;
+  message += `${item.quantity}x ${item.name} - RM${(item.finalPrice || 0) * (item.quantity || 1)}\n`;
 
       if (item.extraProtein) {
         message += " + Extra Protein\n";

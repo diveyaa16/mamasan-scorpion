@@ -943,7 +943,7 @@ if (item.spicy) {
       encodeURIComponent(message);
 
     window.open(
-      `https://wa.me/60124073424?text=${whatsappMessage}`,
+      `https://wa.me/60173276821?text=${whatsappMessage}`,
       "_blank"
     );
   }}
